@@ -7,6 +7,7 @@ class UserLogout extends React.Component {
     this.props.userLogout();
   }
   render() {
+    console.log("user log out component is called");
     return null;
   }
 }

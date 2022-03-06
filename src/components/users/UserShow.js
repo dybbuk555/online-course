@@ -16,12 +16,12 @@ class UserShow extends React.Component {
 
             <ul className="navbar-nav flex-row">
               <li className="nav-item mx-2">
-                <Link to="/" className="nav-link">
+                <Link to="/" className="nav-link text-white">
                   All coures
                 </Link>
               </li>
               <li className="nav-item mx-2">
-                <Link to="/" className="nav-link">
+                <Link to="/" className="nav-link text-white">
                   User data
                 </Link>
               </li>

@@ -12,7 +12,9 @@ import UserRegister from "./users/UserRegister";
 import UserLogin from "./users/UserLogin";
 import UserLogout from "./users/UserLogout";
 import UserShow from "./users/UserShow";
+import InstructorShow from "./instructor/InstructorShow";
 import history from "../helpers/history";
+import { PrivateRoute } from "./PrivateRoute";
 
 const App = () => {
   console.log(window.location);
@@ -22,24 +24,16 @@ const App = () => {
         <div>
           <Header />
           <Switch>
-            <Route path="/user/">
-              <UserShow />
-            </Route>
-            <Route path="/user/register">
+            <Route path="/register">
               <UserRegister />
             </Route>
-            <Route path="/user/login">
+            <Route path="/login">
               <UserLogin />
             </Route>
-            <Route path="/user/logout">
-              <UserLogout />
-            </Route>
-            <Route path="/user/myspace">
-              <h1>this is my space</h1>
-            </Route>
-            <Route path="/user/register">
-              <UserRegister />
-            </Route>
+
+            <PrivateRoute path="/user/logout" component={UserLogout} />
+            <PrivateRoute path="/instructor" component={InstructorShow} />
+            <PrivateRoute path="/user/" component={UserShow} />
 
             {/* <Route path="/user/register" exact component={UserRegister} />
             <Route path="/user/register" exact component={UserRegister} />

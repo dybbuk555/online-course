@@ -58,6 +58,43 @@ export const userRegister = (formValues) => async (dispatch, getState) => {
 };
 ////////////////////////////////////////////////////////////////
 
+export const courseCreate = (formValues) => async (dispatch, getState) => {
+  const response = await server.post("/instructor/course", { ...formValues });
+  if (response.data && response.data.jwtToken) {
+    console.log("get token");
+    const token = response.data.jwtToken;
+    const jwtDecoded = jwt(token);
+    localStorage.setItem("user", JSON.stringify(response.data)); // local: encoeded
+    dispatch({ type: SIGN_IN, payload: jwtDecoded }); // reducer state: decoded
+    history.push("/");
+  } else {
+    console.log(
+      "oops something went wrong in user register and here's the response"
+    );
+    console.log(response);
+  }
+};
+
+export const courseEdit = (formValues) => async (dispatch, getState) => {
+  const response = await server.post("/instructor/course/:id", {
+    ...formValues,
+  });
+  if (response.data && response.data.jwtToken) {
+    console.log("get token");
+    const token = response.data.jwtToken;
+    const jwtDecoded = jwt(token);
+    localStorage.setItem("user", JSON.stringify(response.data)); // local: encoeded
+    dispatch({ type: SIGN_IN, payload: jwtDecoded }); // reducer state: decoded
+    history.push("/");
+  } else {
+    console.log(
+      "oops something went wrong in user register and here's the response"
+    );
+    console.log(response);
+  }
+};
+
+////////////////////////////////////////////////////////////////
 export const createStream = (formValues) => async (dispatch, getState) => {
   const { userId } = getState().auth;
   console.log(

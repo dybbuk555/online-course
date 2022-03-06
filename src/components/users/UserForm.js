@@ -29,6 +29,7 @@ class UserForm extends React.Component {
             {...input}
             placeholder={placeholder}
             type={type}
+            autoComplete="on"
           />
         </i>
 

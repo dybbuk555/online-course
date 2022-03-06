@@ -9,7 +9,7 @@ import {
   DELETE_STREAM,
   EDIT_STREAM,
 } from "./types";
-import history from "./../history";
+import history from "./../helpers/history";
 import { authHeader } from "../helpers/auth-header";
 
 export const userSignIn =
@@ -22,6 +22,7 @@ export const userSignIn =
         const jwtDecoded = jwt(response.data.jwtToken);
         localStorage.setItem("user", JSON.stringify(response.data)); // local: encoeded
         dispatch({ type: SIGN_IN, payload: jwtDecoded }); // reducer state: decoded
+        history.push("/");
       })
       .catch((error) => {
         console.log("error in sign in:", error);
@@ -33,6 +34,7 @@ export const userSignIn =
 export const userLogout = () => {
   console.log("action: signout:");
   localStorage.removeItem("user");
+  history.push("/");
   return {
     type: SIGN_OUT,
   };
@@ -46,6 +48,7 @@ export const userRegister = (formValues) => async (dispatch, getState) => {
     const jwtDecoded = jwt(token);
     localStorage.setItem("user", JSON.stringify(response.data)); // local: encoeded
     dispatch({ type: SIGN_IN, payload: jwtDecoded }); // reducer state: decoded
+    history.push("/");
   } else {
     console.log(
       "oops something went wrong in user register and here's the response"

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Modal from "../Modal";
-import history from "../../history";
+import history from "../../helpers/history";
 import { connect } from "react-redux";
 import { fetchStream, deleteStreams } from "../../actions";
 

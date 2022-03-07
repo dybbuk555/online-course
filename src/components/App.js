@@ -10,7 +10,6 @@ import Header from "./header/Header";
 //
 import UserRegister from "./users/UserRegister";
 import UserLogin from "./users/UserLogin";
-import UserLogout from "./users/UserLogout";
 import UserShow from "./users/UserShow";
 import InstructorShow from "./instructor/InstructorShow";
 import history from "../helpers/history";
@@ -30,8 +29,7 @@ const App = () => {
             <Route path="/login">
               <UserLogin />
             </Route>
-
-            <PrivateRoute path="/user/logout" component={UserLogout} />
+            {/* protected route */}
             <PrivateRoute path="/instructor" component={InstructorShow} />
             <PrivateRoute path="/user/" component={UserShow} />
 

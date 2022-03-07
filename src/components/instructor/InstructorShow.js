@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import InstructorHeader from "./InstructorHeader";
 import history from "../../helpers/history";
 import { Router, Route, Switch } from "react-router-dom";
+import CourseCreate from "./CourseCreate";
+import CourseEdit from "./CourseEdit";
 
 class InstructorShow extends React.Component {
   render() {
@@ -15,10 +17,10 @@ class InstructorShow extends React.Component {
               <h2>all courses</h2>
             </Route>
             <Route exact path="/instructor/course/new">
-              <h2>create course</h2>
+              <CourseCreate />
             </Route>
             <Route exact path="/instructor/course/:id/edit">
-              <h2>edit </h2>
+              <CourseEdit />
             </Route>
           </Switch>
         </Router>

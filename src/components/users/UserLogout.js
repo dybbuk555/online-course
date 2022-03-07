@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { userLogout, messageSuccess, messageError } from "../../actions";
+import { userLogout } from "../../actions";
 
 class UserLogout extends React.Component {
   componentDidMount() {
     this.props.userLogout();
-    this.props.messageSuccess("log out success!");
   }
   render() {
     console.log("user log out component is called");
@@ -16,6 +15,4 @@ class UserLogout extends React.Component {
 const mapStateToProps = (state) => {
   return { isSigned: state.auth };
 };
-export default connect(mapStateToProps, { userLogout, messageSuccess })(
-  UserLogout
-);
+export default connect(mapStateToProps, { userLogout })(UserLogout);

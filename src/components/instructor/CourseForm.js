@@ -4,7 +4,7 @@ import { Field, reduxForm } from "redux-form";
 //import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "font-awesome/css/font-awesome.min.css";
 
-class UserForm extends React.Component {
+class CourseForm extends React.Component {
   renderError({ error, touched }) {
     if (touched && error) {
       return <div className="text-danger small">{error}</div>;
@@ -48,34 +48,47 @@ class UserForm extends React.Component {
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <div className="mb-3">
-          {this.props.name === "Login" ? null : (
-            <Field
-              name="username"
-              component={this.renderInput}
-              type="text"
-              placeholder="&#xf007;  User Name"
-            />
-          )}
-        </div>
-
-        <div className="mb-3">
           <Field
-            formType={this.props.name}
-            name="email"
+            name="title"
             component={this.renderInput}
-            type="email"
-            placeholder="&#xf0e0;  Email"
+            type="text"
+            placeholder="&#xf007; Title"
           />
         </div>
 
         <div className="mb-3">
           <Field
             formType={this.props.name}
-            name="password"
+            name="description"
             component={this.renderInput}
-            type="password"
-            placeholder="&#xf023;  Password"
+            type="text"
+            placeholder="&#xf0e0; Description"
           />
+        </div>
+
+        <div className="mb-3">
+          <Field
+            formType={this.props.name}
+            name="price"
+            component={this.renderInput}
+            type="number"
+            placeholder="&#xf023; Price"
+          />
+        </div>
+
+        <div className="mb-3">
+          <Field name="Content" component="textarea" />
+        </div>
+
+        <div className="mb-3">
+          <Field name="Category" component="select">
+            <option value="Design">Design</option>
+            <option value="Software">Software</option>
+            <option value="Bussiness">Bussiness</option>
+            <option value="Photography">Photography</option>
+            <option value="Music">Music</option>
+            <option value="Others">Others</option>
+          </Field>
         </div>
 
         <button className="btn btn-outline-success input-block-level">
@@ -88,23 +101,23 @@ class UserForm extends React.Component {
 
 const validate = (formValues) => {
   const errors = {};
-  if (!formValues.username) {
-    errors.username = "You must enter a username";
+  if (!formValues.title) {
+    errors.title = "You must enter a title";
   }
-  if (!formValues.email) {
-    errors.email = "You must enter an email";
-  } else if (
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formValues.email)
-  ) {
-    errors.email = "Invalid email address";
+  if (!formValues.description) {
+    errors.description = "You must type some description";
   }
-  if (!formValues.password) {
-    errors.password = "You must enter a password";
+  if (!formValues.value) {
+    errors.value = "You must enter the price";
   }
+  if (formValues.value < 0) {
+    errors.value = "Price should be larger than 0";
+  }
+
   return errors;
 };
 
 export default reduxForm({
-  form: "userForm",
+  form: "courseForm",
   validate: validate,
-})(UserForm);
+})(CourseForm);

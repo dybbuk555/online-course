@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { courseEdit } from "../../actions";
-import UserForm from "./UserForm";
+import CourseForm from "./CourseForm";
 
 class CourseEdit extends React.Component {
   onSubmit = (formValues) => {
@@ -16,7 +16,7 @@ class CourseEdit extends React.Component {
           <div className="offset-md-3 col-md-6 align-self-center text-center text-nowrap">
             <h3> Edit course!</h3>
             <hr />
-            <UserForm onSubmit={this.onSubmit} name="Edit" />
+            <CourseForm onSubmit={this.onSubmit} name="Edit" />
           </div>
         </div>
       </div>

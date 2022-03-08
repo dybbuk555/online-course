@@ -14,7 +14,7 @@ class CourseCreate extends React.Component {
       <div className="container">
         <div className="row mt-5">
           <div className="offset-md-3 col-md-6 align-self-center text-center text-nowrap">
-            <h3> Create new course!</h3>
+            <h3> Create new course</h3>
             <hr />
             <CourseForm onSubmit={this.onSubmit} name="Create" />
           </div>

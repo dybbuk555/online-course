@@ -13,7 +13,8 @@ class CourseForm extends React.Component {
     }
   }
 
-  renderInput = ({ input, meta, placeholder, type }) => {
+  renderInput = (args) => {
+    const { input, meta, placeholder, type } = args;
     //console.log("input", input, meta);
     const className = `field ${
       meta.error && meta.touched ? "" : "" //"is-invalid" : "is-valid"
@@ -21,10 +22,12 @@ class CourseForm extends React.Component {
     //console.log("renderInput", input, meta);
     // input from filed built-in
     // label from our defined
+    console.log("args...", args);
     return (
       <div className={className}>
         <i className="fa">
           <input
+            id={input.name}
             className="form-control "
             {...input}
             placeholder={placeholder}
@@ -47,7 +50,65 @@ class CourseForm extends React.Component {
     //console.log("render in form", this.props);
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <div className="mb-3">
+        <div className="row g-3 align-items-center justify-content-end m-2">
+          <div className="col-auto">
+            <label htmlFor="title" className="form-label">
+              title
+            </label>
+          </div>
+          <div className="col-auto">
+            <Field
+              name="title"
+              component={this.renderInput}
+              type="text"
+              placeholder="&#xf007; Title"
+            />
+          </div>
+        </div>
+        <div className="row g-3 align-items-center  justify-content-end m-2">
+          <div className="col-auto">
+            <label htmlFor="description" className="form-label">
+              description
+            </label>
+          </div>
+          <div className="col-auto">
+            <Field
+              formType={this.props.name}
+              name="description"
+              component={this.renderInput}
+              type="text"
+              placeholder="&#xf0e0; Description"
+            />
+          </div>
+        </div>
+        <div className="row g-3 align-items-center  justify-content-end m-2">
+          <div className="col-auto">
+            <label htmlFor="price" className="form-label">
+              price
+            </label>
+          </div>
+          <div className="col-auto">
+            <Field
+              formType={this.props.name}
+              name="price"
+              component={this.renderInput}
+              type="number"
+              placeholder="&#xf023; Price"
+            />
+          </div>
+        </div>
+        <div className="row g-3 align-items-center  justify-content-end m-2">
+          <div className="col-auto">
+            <label htmlFor="Content" className="form-label">
+              Content
+            </label>
+          </div>
+          <div className="col-auto">
+            <Field name="Content" component="textarea" />
+          </div>
+        </div>
+
+        {/* <div className="mb-3 row g-3 align-items-center">
           <Field
             name="title"
             component={this.renderInput}
@@ -57,6 +118,7 @@ class CourseForm extends React.Component {
         </div>
 
         <div className="mb-3">
+          <label htmlFor="description">description</label>
           <Field
             formType={this.props.name}
             name="description"
@@ -78,7 +140,7 @@ class CourseForm extends React.Component {
 
         <div className="mb-3">
           <Field name="Content" component="textarea" />
-        </div>
+        </div> */}
 
         <div className="mb-3">
           <Field name="Category" component="select">

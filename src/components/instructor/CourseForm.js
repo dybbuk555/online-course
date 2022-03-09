@@ -16,7 +16,7 @@ class CourseForm extends React.Component {
   renderInput = (args) => {
     const { input, meta, placeholder, type } = args;
     //console.log("input", input, meta);
-    const className = `field ${
+    const className = `${
       meta.error && meta.touched ? "" : "" //"is-invalid" : "is-valid"
     }`;
     //console.log("renderInput", input, meta);
@@ -25,16 +25,15 @@ class CourseForm extends React.Component {
     console.log("args...", args);
     return (
       <div className={className}>
-        <i className="fa">
-          <input
-            id={input.name}
-            className="form-control "
-            {...input}
-            placeholder={placeholder}
-            type={type}
-            autoComplete="on"
-          />
-        </i>
+        <input
+          style={{ width: "100%" }}
+          id={input.name}
+          className="form-control"
+          {...input}
+          placeholder={placeholder}
+          type={type}
+          autoComplete="on"
+        />
 
         {this.renderError(meta)}
       </div>
@@ -50,112 +49,90 @@ class CourseForm extends React.Component {
     //console.log("render in form", this.props);
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <div className="row g-3 align-items-center justify-content-end m-2">
-          <div className="col-auto">
+        <div className="row g-3 align-items-center justify-content-center m-2">
+          <div className="col-md-2  col-4">
             <label htmlFor="title" className="form-label">
-              title
+              TITLE
             </label>
           </div>
-          <div className="col-auto">
+          <div className="col-md-10 col-8">
             <Field
               name="title"
               component={this.renderInput}
               type="text"
-              placeholder="&#xf007; Title"
+              placeholder="Title"
             />
           </div>
         </div>
-        <div className="row g-3 align-items-center  justify-content-end m-2">
-          <div className="col-auto">
+        <div className="row g-3 align-items-center  justify-content-between m-2">
+          <div className="col-md-2  col-4">
             <label htmlFor="description" className="form-label">
-              description
+              DESCRIPTION
             </label>
           </div>
-          <div className="col-auto">
+          <div className="col-md-10 col-8">
             <Field
               formType={this.props.name}
               name="description"
               component={this.renderInput}
               type="text"
-              placeholder="&#xf0e0; Description"
+              placeholder="Description"
             />
           </div>
         </div>
-        <div className="row g-3 align-items-center  justify-content-end m-2">
-          <div className="col-auto">
+        <div className="row g-3 align-items-center justify-content-between m-2">
+          <div className="col-md-2  col-4">
             <label htmlFor="price" className="form-label">
-              price
+              PRICE
             </label>
           </div>
-          <div className="col-auto">
+          <div className="col-md-10 col-8">
             <Field
               formType={this.props.name}
               name="price"
               component={this.renderInput}
               type="number"
-              placeholder="&#xf023; Price"
+              placeholder="Price"
             />
           </div>
         </div>
-        <div className="row g-3 align-items-center  justify-content-end m-2">
-          <div className="col-auto">
+        <div className="row g-3 align-items-center justify-content-between m-2">
+          <div className="col-md-2  col-4">
             <label htmlFor="Content" className="form-label">
-              Content
+              CONTENT
             </label>
           </div>
-          <div className="col-auto">
-            <Field name="Content" component="textarea" />
+          <div className="col-md-10 col-8">
+            <Field
+              name="Content"
+              component="textarea"
+              className="form-control"
+              placeholder="Content"
+              style={{ height: "250px" }}
+            />
           </div>
         </div>
 
-        {/* <div className="mb-3 row g-3 align-items-center">
-          <Field
-            name="title"
-            component={this.renderInput}
-            type="text"
-            placeholder="&#xf007; Title"
-          />
+        <div className="row g-3 align-items-center justify-content-between m-2 mb-4">
+          <div className="col-md-2  col-4">
+            <label htmlFor="Content" className="form-label">
+              CATEGORY
+            </label>
+          </div>
+          <div className="col-md-10 col-8">
+            <Field name="Category" component="select" className="form-control">
+              <option value="Design">Design</option>
+              <option value="Software">Software</option>
+              <option value="Bussiness">Bussiness</option>
+              <option value="Photography">Photography</option>
+              <option value="Music">Music</option>
+              <option value="Others">Others</option>
+            </Field>
+          </div>
         </div>
-
-        <div className="mb-3">
-          <label htmlFor="description">description</label>
-          <Field
-            formType={this.props.name}
-            name="description"
-            component={this.renderInput}
-            type="text"
-            placeholder="&#xf0e0; Description"
-          />
+        <div className="d-flex justify-content-center">
+          <button className="btn btn-outline-success">{this.props.name}</button>
         </div>
-
-        <div className="mb-3">
-          <Field
-            formType={this.props.name}
-            name="price"
-            component={this.renderInput}
-            type="number"
-            placeholder="&#xf023; Price"
-          />
-        </div>
-
-        <div className="mb-3">
-          <Field name="Content" component="textarea" />
-        </div> */}
-
-        <div className="mb-3">
-          <Field name="Category" component="select">
-            <option value="Design">Design</option>
-            <option value="Software">Software</option>
-            <option value="Bussiness">Bussiness</option>
-            <option value="Photography">Photography</option>
-            <option value="Music">Music</option>
-            <option value="Others">Others</option>
-          </Field>
-        </div>
-
-        <button className="btn btn-outline-success input-block-level">
-          {this.props.name}
-        </button>
       </form>
     );
   }

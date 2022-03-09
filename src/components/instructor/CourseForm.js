@@ -19,9 +19,7 @@ class CourseForm extends React.Component {
     const className = `${
       meta.error && meta.touched ? "" : "" //"is-invalid" : "is-valid"
     }`;
-    //console.log("renderInput", input, meta);
-    // input from filed built-in
-    // label from our defined
+
     console.log("args...", args);
     return (
       <div className={className}>
@@ -140,17 +138,18 @@ class CourseForm extends React.Component {
 
 const validate = (formValues) => {
   const errors = {};
+  console.log("form validate formValues:", formValues);
   if (!formValues.title) {
     errors.title = "You must enter a title";
   }
   if (!formValues.description) {
     errors.description = "You must type some description";
   }
-  if (!formValues.value) {
-    errors.value = "You must enter the price";
+  if (!formValues.price) {
+    errors.price = "You must enter the price";
   }
-  if (formValues.value < 0) {
-    errors.value = "Price should be larger than 0";
+  if (formValues.price < 0) {
+    errors.price = "Price should be larger than 0";
   }
 
   return errors;

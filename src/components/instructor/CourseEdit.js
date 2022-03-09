@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { courseEdit } from "../../actions";
+import { editCourse } from "../../actions";
 import CourseForm from "./CourseForm";
 
 class CourseEdit extends React.Component {
@@ -20,4 +20,4 @@ class CourseEdit extends React.Component {
   }
 }
 
-export default connect(null, { courseEdit })(CourseEdit);
+export default connect(null, { editCourse })(CourseEdit);

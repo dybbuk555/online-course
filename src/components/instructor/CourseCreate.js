@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { courseCreate } from "../../actions";
+import { createCourse } from "../../actions";
 import CourseForm from "./CourseForm";
 
 class CourseCreate extends React.Component {
   onSubmit = (formValues) => {
-    this.props.userRegister(formValues);
+    this.props.createCourse(formValues);
   };
 
   render() {
@@ -20,4 +20,4 @@ class CourseCreate extends React.Component {
   }
 }
 
-export default connect(null, { courseCreate })(CourseCreate);
+export default connect(null, { createCourse })(CourseCreate);

@@ -115,7 +115,7 @@ const Header = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log("sign in state", state);
+  //console.log("sign in state", state);
   return { isSignedIn: state.auth.isSignedIn };
 };
 export default connect(mapStateToProps)(Header);

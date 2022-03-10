@@ -12,7 +12,6 @@ import {
   ERROR,
 } from "./types";
 import history from "./../helpers/history";
-import { authHeader } from "../helpers/auth-header";
 
 export const userSignIn =
   ({ email, password }) =>
@@ -22,6 +21,7 @@ export const userSignIn =
       .post("/user/login", { email, password })
       .then((response) => {
         const jwtDecoded = jwt(response.data.jwtToken);
+        console.log("DDDDDDDDDDDDDDDecoded jwt:", jwtDecoded);
         localStorage.setItem("user", JSON.stringify(response.data)); // local: encoeded
         dispatch({ type: SIGN_IN, payload: jwtDecoded }); // reducer state: decoded
         history.push("/"); // avoid clearing alert message

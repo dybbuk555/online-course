@@ -39,7 +39,7 @@ class CourseForm extends React.Component {
   };
 
   onSubmit = (formValues) => {
-    console.log("onSubmit in User form", formValues);
+    //console.log("onSubmit in User form", formValues);
     this.props.onSubmit(formValues);
   };
 
@@ -138,7 +138,6 @@ class CourseForm extends React.Component {
 
 const validate = (formValues) => {
   const errors = {};
-  console.log("form validate formValues:", formValues);
   if (!formValues.title) {
     errors.title = "You must enter a title";
   }

@@ -13,14 +13,13 @@ import UserLogin from "./users/UserLogin";
 import UserShow from "./users/UserShow";
 import InstructorShow from "./instructor/InstructorShow";
 import history from "../helpers/history";
-import { PrivateRoute } from "./PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import { messageClear } from "../actions";
 import { connect } from "react-redux";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    console.log("did mount props", this.props);
     history.listen((location, action) => {
       this.props.messageClear();
     });

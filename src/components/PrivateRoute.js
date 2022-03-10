@@ -1,19 +1,20 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-export const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log("PrivateRoute rest:", rest);
-  console.log(localStorage.getItem("user"));
+const PrivateRoute = ({ component: Component, isSignedIn, ...rest }) => {
   return (
     <Route
       {...rest}
       render={() =>
-        localStorage.getItem("user") ? (
-          <Component />
-        ) : (
-          <Redirect to={{ pathname: "/login" }} />
-        )
+        isSignedIn ? <Component /> : <Redirect to={{ pathname: "/login" }} />
       }
     />
   );
 };
+
+const mapStateToProps = (state) => {
+  return { isSignedIn: state.auth.isSignedIn };
+};
+
+export default connect(mapStateToProps)(PrivateRoute);

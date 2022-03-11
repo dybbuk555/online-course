@@ -10,8 +10,8 @@ import Header from "./header/Header";
 //
 import UserRegister from "./users/UserRegister";
 import UserLogin from "./users/UserLogin";
-import UserShow from "./users/UserShow";
-import InstructorShow from "./instructor/InstructorShow";
+import UserPage from "./users/UserPage";
+import InstructorPage from "./instructor/InstructorPage";
 import history from "../helpers/history";
 import PrivateRoute from "./PrivateRoute";
 import { messageClear } from "../actions";
@@ -49,8 +49,8 @@ class App extends React.Component {
               </Route>
 
               {/* protected route */}
-              <PrivateRoute path="/instructor" component={InstructorShow} />
-              <PrivateRoute path="/user/" component={UserShow} />
+              <PrivateRoute path="/instructor" component={InstructorPage} />
+              <PrivateRoute path="/user/" component={UserPage} />
 
               {/* <Route path="/user/register" exact component={UserRegister} />
               <Route path="/user/register" exact component={UserRegister} />

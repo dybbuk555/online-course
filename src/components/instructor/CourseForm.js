@@ -20,7 +20,6 @@ class CourseForm extends React.Component {
       meta.error && meta.touched ? "" : "" //"is-invalid" : "is-valid"
     }`;
 
-    console.log("args...", args);
     return (
       <div className={className}>
         <input
@@ -118,7 +117,7 @@ class CourseForm extends React.Component {
             </label>
           </div>
           <div className="col-md-10 col-8">
-            <Field name="Category" component="select" className="form-control">
+            <Field name="category" component="select" className="form-control">
               <option value="Design">Design</option>
               <option value="Software">Software</option>
               <option value="Bussiness">Bussiness</option>

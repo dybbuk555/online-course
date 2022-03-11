@@ -8,7 +8,7 @@ import UserLogout from "./UserLogout";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "../../helpers/history";
 
-class UserShow extends React.Component {
+class UserPage extends React.Component {
   render() {
     return (
       <Fragment>
@@ -48,4 +48,4 @@ class UserShow extends React.Component {
 const mapStateToProps = (state) => {
   return state;
 };
-export default connect(mapStateToProps, {})(UserShow);
+export default connect(mapStateToProps, {})(UserPage);

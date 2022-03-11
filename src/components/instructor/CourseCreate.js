@@ -14,7 +14,11 @@ class CourseCreate extends React.Component {
       <div className="container mt-5 justify-content-center">
         <h3> Create new course</h3>
         <hr />
-        <CourseForm onSubmit={this.onSubmit} name="Create" />
+        <CourseForm
+          onSubmit={this.onSubmit}
+          name="Create"
+          initialValues={{ category: "Others" }}
+        />
       </div>
     );
   }

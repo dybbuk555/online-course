@@ -7,6 +7,7 @@ import {
 } from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
+import { orderBy } from "lodash";
 
 export const fetchCourses = (filter) => async (dispatch, getState) => {
   // authHeader is not needed, because all peoeple should be able to access all classes
@@ -31,9 +32,10 @@ export const fetchCourses = (filter) => async (dispatch, getState) => {
     });
 };
 
-export const userCourse = () => async (dispatch, getStae) => {};
-
-export const instructorCourse = () => async (dispatch, getState) => {};
+export const sortCourses = (sortBy) => async (dispatch, getState) => {
+  const sortedArry = orderBy(getState().course.data, [sortBy.toLowerCase()]);
+  dispatch({ type: FETCH_COURSES, payload: sortedArry });
+};
 
 export const createCourse = (formValues) => async (dispatch, getState) => {
   console.log(

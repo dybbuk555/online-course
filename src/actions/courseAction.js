@@ -8,7 +8,7 @@ import {
 } from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
-import { orderBy } from "lodash";
+import { get, orderBy } from "lodash";
 import history from "./../helpers/history";
 
 export const fetchCourse = (courseId) => async (dispatch) => {
@@ -87,7 +87,32 @@ export const createCourse = (formValues) => async (dispatch, getState) => {
     });
 };
 
-export const editCourse = (formValues) => async (dispatch, getState) => {
-  console.log("this is editCourse action", formValues);
-  dispatch({ type: EDIT_COURSE, payload: "Edit course" });
-};
+export const editCourse =
+  (formValues, courseId) => async (dispatch, getState) => {
+    console.log("this is editCourse action", formValues);
+    console.log(courseId);
+
+    server
+      .put(
+        `/course/${courseId}/edit`,
+        { formValues },
+        { headers: authHeader() }
+      )
+      .then((response) => {
+        console.log("successfully update course ");
+        history.push("/instructor/course"); // avoid clearing alert message
+        dispatch({ type: SUCCESS, payload: "Course updated successfully" });
+      })
+      .catch((error) => {
+        if (!error.response) {
+          history.push("/instructor/course");
+          dispatch({
+            type: ERROR,
+            payload: "fail to update course, no response",
+          });
+        } else {
+          history.push("/instructor/course");
+          dispatch({ type: ERROR, payload: error.response.data.message });
+        }
+      });
+  };

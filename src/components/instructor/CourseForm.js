@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 //import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 //import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "font-awesome/css/font-awesome.min.css";
+import history from "./../../helpers/history";
 
 class CourseForm extends React.Component {
   renderError({ error, touched }) {
@@ -43,6 +44,7 @@ class CourseForm extends React.Component {
 
   render() {
     console.log("render in form", this.props.initialValues);
+    console.log("HHHHistroy:", history);
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <div className="row g-3 align-items-center justify-content-center m-2">
@@ -126,9 +128,17 @@ class CourseForm extends React.Component {
             </Field>
           </div>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-evenly">
+          <a
+            className="btn w-25 mt-2 btn-outline-danger"
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            Back
+          </a>
           <button
-            className={`btn w-50 mt-2 ${
+            className={`btn w-25 mt-2 ${
               this.props.name === "Create"
                 ? "btn-outline-success"
                 : "btn-outline-info"

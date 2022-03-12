@@ -8,7 +8,7 @@ import {
 } from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
-import { get, orderBy } from "lodash";
+import { orderBy } from "lodash";
 import history from "./../helpers/history";
 
 export const fetchCourse = (courseId) => async (dispatch) => {

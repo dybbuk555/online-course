@@ -1,13 +1,13 @@
-import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
 import StreamCreate from "./streams/StreamCreate";
 import StreamEdit from "./streams/StreamEdit";
 import StreamDelete from "./streams/StreamDelete";
 import StreamShow from "./streams/StreamShow";
 import StreamList from "./streams/StreamList";
-import Header from "./header/Header";
 
 //
+import React from "react";
+import { Router, Route, Switch } from "react-router-dom";
+import Header from "./header/Header";
 import UserRegister from "./users/UserRegister";
 import UserLogin from "./users/UserLogin";
 import UserPage from "./users/UserPage";
@@ -16,6 +16,7 @@ import history from "../helpers/history";
 import PrivateRoute from "./PrivateRoute";
 import { messageClear } from "../actions";
 import { connect } from "react-redux";
+import MainPage from "./main/MainPage";
 
 class App extends React.Component {
   constructor(props) {
@@ -41,6 +42,9 @@ class App extends React.Component {
               </Route>
               <Route path="/login">
                 <UserLogin />
+              </Route>
+              <Route exact path="/">
+                <MainPage />
               </Route>
 
               {/* protected route */}

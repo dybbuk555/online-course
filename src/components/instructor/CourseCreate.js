@@ -12,7 +12,7 @@ class CourseCreate extends React.Component {
     console.log("render", this.props);
     return (
       <div className="container mt-5 justify-content-center">
-        <h3> Create new course</h3>
+        <h1> Create new course</h1>
         <hr />
         <CourseForm
           onSubmit={this.onSubmit}

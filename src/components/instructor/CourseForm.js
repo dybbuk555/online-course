@@ -24,7 +24,6 @@ class CourseForm extends React.Component {
       <div className={className}>
         <input
           style={{ width: "100%" }}
-          id={input.name}
           className="form-control"
           {...input}
           placeholder={placeholder}
@@ -43,7 +42,7 @@ class CourseForm extends React.Component {
   };
 
   render() {
-    //console.log("render in form", this.props);
+    console.log("render in form", this.props.initialValues);
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <div className="row g-3 align-items-center justify-content-center m-2">
@@ -101,7 +100,7 @@ class CourseForm extends React.Component {
           </div>
           <div className="col-md-10 col-8">
             <Field
-              name="Content"
+              name="content"
               component="textarea"
               className="form-control"
               placeholder="Content"
@@ -128,7 +127,15 @@ class CourseForm extends React.Component {
           </div>
         </div>
         <div className="d-flex justify-content-center">
-          <button className="btn btn-outline-success">{this.props.name}</button>
+          <button
+            className={`btn w-50 mt-2 ${
+              this.props.name === "Create"
+                ? "btn-outline-success"
+                : "btn-outline-info"
+            }`}
+          >
+            {this.props.name}
+          </button>
         </div>
       </form>
     );
@@ -156,4 +163,5 @@ const validate = (formValues) => {
 export default reduxForm({
   form: "courseForm",
   validate: validate,
+  enableReinitialize: true,
 })(CourseForm);

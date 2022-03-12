@@ -3,16 +3,20 @@ import { connect } from "react-redux";
 import { fetchCourses } from "../../actions";
 import courseCatgory from "./../../resources/svcs";
 import SortButton from "../../helpers/sortButton";
+import { Link } from "react-router-dom";
 
 class InstructorShow extends React.Component {
   componentDidMount() {
-    this.props.fetchCourses({ filter: { userid: 123456 } });
+    const userId = this.props.auth.user.userId;
+    console.log("auth:", userId);
+    this.props.fetchCourses({ userId, filtertype: "instructor" });
   }
   renderCourseCard() {
     const { data } = this.props.course;
     console.log("renderCourseCard:", data);
-    if (data) {
-      return data.map((course) => {
+    console.log(data);
+    if (data && data.length > 0) {
+      const courseCards = data.map((course) => {
         return (
           <div className="col" key={course._id}>
             <div className="card h-100">
@@ -23,15 +27,30 @@ class InstructorShow extends React.Component {
               />
               <div className="card-body">
                 <h4 className="card-title">{course.title}</h4>
-                <p className="card-text">Price: {course.price} $</p>
                 <p className="card-text">Description: {course.description}</p>
+              </div>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">Price: {course.price} $</li>
+                <li className="list-group-item">
+                  Instructor: {course.instructor.username}
+                </li>
+              </ul>
+              <div className="card-body">
+                <Link
+                  className="btn btn-outline-info w-100"
+                  to={`/instructor/course/${course._id}/edit`}
+                >
+                  Edit
+                </Link>
               </div>
             </div>
           </div>
         );
       });
+      console.log("courseCards:", courseCards);
+      return courseCards;
     } else {
-      return;
+      return <h3>No courses to show</h3>;
     }
   }
 

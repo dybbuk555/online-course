@@ -7,7 +7,7 @@ const InstructorHeader = (props) => {
       <div className="container">
         <div className="align-items-start flex-column">
           <div className="row">
-            <Link to="/" className="navbar-brand">
+            <Link to="/course" className="navbar-brand">
               <h3> My teaching</h3>
             </Link>
           </div>
@@ -15,20 +15,20 @@ const InstructorHeader = (props) => {
           <ul className="navbar-nav flex-row">
             <li className="nav-item mx-2">
               <Link to="/instructor/course" className="nav-link text-white">
-                All coures
+                My coures
               </Link>
             </li>
             <li className="nav-item mx-2">
               <Link to="/instructor/course/new" className="nav-link text-white">
-                Create coures
+                Create coure
               </Link>
             </li>
             <li className="nav-item mx-2">
               <Link
-                to="/instructor/course/:id/edit"
+                to="/instructor/course/statistic"
                 className="nav-link text-white"
               >
-                Edit coure
+                Statistic
               </Link>
             </li>
           </ul>

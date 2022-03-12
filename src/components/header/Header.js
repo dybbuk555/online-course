@@ -80,7 +80,7 @@ const Header = (props) => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link to="/" className="nav-link">
-                Category
+                Categories
               </Link>
             </li>
           </ul>

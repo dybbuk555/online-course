@@ -20,8 +20,19 @@ class InstructorPage extends React.Component {
             <Route exact path="/instructor/course/new">
               <CourseCreate />
             </Route>
-            <Route exact path="/instructor/course/:id/edit">
-              <CourseEdit />
+            <Route
+              exact
+              path="/instructor/course/:courseId/edit"
+              component={CourseEdit}
+            />
+
+            <Route exact path="/instructor/course/statistic">
+              <div className="container">
+                <h1>Info about instructor</h1>
+                <h2>Total Class:</h2>
+                <h2> Students count:</h2>
+                <h2> total income: (studentCount*price)</h2>
+              </div>
             </Route>
           </Switch>
         </Router>

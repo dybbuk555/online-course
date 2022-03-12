@@ -4,33 +4,58 @@ import {
   ERROR,
   SUCCESS,
   FETCH_COURSES,
+  FETCH_COURSE,
 } from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
 import { orderBy } from "lodash";
+import history from "./../helpers/history";
 
-export const fetchCourses = (filter) => async (dispatch, getState) => {
-  // authHeader is not needed, because all peoeple should be able to access all classes
-  // filter = {instructor: userid}  for render instructor's classes
-  // filter = {students: username}  for render my class
-  // filter = {} for render main page
+export const fetchCourse = (courseId) => async (dispatch) => {
+  console.log("action: fetchCourse", courseId);
   server
-    .get("/course", { filter })
+    .get(`/course/${courseId}`)
     .then((response) => {
-      console.log("fetch courses response:", response);
-      dispatch({ type: FETCH_COURSES, payload: response.data.courses });
+      dispatch({ type: FETCH_COURSE, payload: response.data.course });
     })
     .catch((error) => {
       if (!error.response) {
         dispatch({
           type: ERROR,
-          payload: "fail to fetch courses, no response",
+          payload: "fail to fetch course, no response",
         });
       } else {
         dispatch({ type: ERROR, payload: error.response.data.message });
       }
     });
 };
+
+export const fetchCourses =
+  ({ userId, filtertype }) =>
+  async (dispatch, getState) => {
+    // authHeader is not needed, because all peoeple should be able to access all classes
+    // filter = {instructor: userid}  for render instructor's classes
+    // filter = {students: username}  for render my class
+    // filter = {} for render main page
+    server
+      .get("/course", {
+        params: { userId, filtertype },
+      })
+      .then((response) => {
+        console.log("fetch courses response:", response);
+        dispatch({ type: FETCH_COURSES, payload: response.data.courses });
+      })
+      .catch((error) => {
+        if (!error.response) {
+          dispatch({
+            type: ERROR,
+            payload: "fail to fetch courses, no response",
+          });
+        } else {
+          dispatch({ type: ERROR, payload: error.response.data.message });
+        }
+      });
+  };
 
 export const sortCourses = (sortBy) => async (dispatch, getState) => {
   const sortedArry = orderBy(getState().course.data, [sortBy.toLowerCase()]);
@@ -47,6 +72,8 @@ export const createCourse = (formValues) => async (dispatch, getState) => {
     .post("/course", { formValues }, { headers: authHeader() })
     .then((response) => {
       console.log("successfully create course ");
+      history.push("/instructor/course"); // avoid clearing alert message
+      dispatch({ type: SUCCESS, payload: "Course created successfully" });
     })
     .catch((error) => {
       if (!error.response) {
@@ -58,7 +85,6 @@ export const createCourse = (formValues) => async (dispatch, getState) => {
         dispatch({ type: ERROR, payload: error.response.data.message });
       }
     });
-  dispatch({ type: CREATE_COURSE, payload: "create course" });
 };
 
 export const editCourse = (formValues) => async (dispatch, getState) => {

@@ -4,7 +4,7 @@ export const SUCCESS = "SUCCESS";
 export const ERROR = "ERROR";
 export const CLEAR = "CLEAR";
 
-export const CREATE_COURSE = "CREATGE_COURSE";
+export const CREATE_COURSE = "CREATGE_COURSE"; // no needed to be an action
 export const EDIT_COURSE = "EDIT_COURSE";
 export const FETCH_COURSE = "FETCH_COURSE";
 export const FETCH_COURSES = "FETCH_COURSES";

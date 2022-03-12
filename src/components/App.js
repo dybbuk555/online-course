@@ -28,14 +28,9 @@ class App extends React.Component {
   render() {
     const { alert } = this.props;
     return (
-      <div className="">
+      <div>
         {alert.message && (
-          <div
-            className={`alert ${alert.type}`}
-            style={{ transition: "ease-out 2s" }}
-          >
-            {alert.message}
-          </div>
+          <div className={`mb-0 alert ${alert.type}`}>{alert.message}</div>
         )}
         <Router history={history}>
           <div>

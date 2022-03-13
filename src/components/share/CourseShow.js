@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCourses } from "../../actions";
-import courseCatgory from "../../resources/svcs";
+import { fetchCourses, subscribeCourse } from "../../actions";
+import courseCatgory from "../../resources/svgs";
 import SortButton from "./SortButton";
 import { Link } from "react-router-dom";
 
 class CourseShow extends React.Component {
   componentDidMount() {
     const { filterType } = this.props;
-    console.log("CCCCCCCouseShow didmount filtertype:", filterType, this.props);
     const fetchType = { filtertype: false };
     if (filterType === "default") {
       fetchType.filtertype = "default";
@@ -21,10 +20,32 @@ class CourseShow extends React.Component {
     }
     this.props.fetchCourses(fetchType);
   }
+  functionalButton(course) {
+    if (this.props.filterType === "instructor") {
+      return (
+        <Link
+          className="btn btn-outline-info w-100"
+          to={`/instructor/course/${course._id}/edit`}
+        >
+          Edit
+        </Link>
+      );
+    } else {
+      return (
+        <button
+          className="btn btn-outline-primary w-100"
+          onClick={() => {
+            this.props.subscribeCourse(course);
+          }}
+        >
+          subscribe
+        </button>
+      );
+    }
+  }
   renderCourseCard() {
     const { data } = this.props.course;
-    console.log("renderCourseCard:", data);
-    console.log(data);
+
     if (data && data.length > 0) {
       const courseCards = data.map((course) => {
         return (
@@ -44,20 +65,26 @@ class CourseShow extends React.Component {
                 <li className="list-group-item">
                   Instructor: {course.instructor.username}
                 </li>
+                <li className="list-group-item">
+                  students: {course.students.length}
+                </li>
               </ul>
               <div className="card-body">
-                <Link
-                  className="btn btn-outline-info w-100"
-                  to={`/instructor/course/${course._id}/edit`}
-                >
-                  Edit
-                </Link>
+                <div className="row">
+                  <div className="col-6 p-0">
+                    <button className="btn btn-outline-success w-100">
+                      Detail
+                    </button>
+                  </div>
+                  <div className="col-6 p-0">
+                    {this.functionalButton(course)}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         );
       });
-      console.log("courseCards:", courseCards);
       return courseCards;
     } else {
       return <h3>No courses to show</h3>;
@@ -77,8 +104,9 @@ class CourseShow extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("the state in course shows:", state);
   return state;
 };
 
-export default connect(mapStateToProps, { fetchCourses })(CourseShow);
+export default connect(mapStateToProps, { fetchCourses, subscribeCourse })(
+  CourseShow
+);

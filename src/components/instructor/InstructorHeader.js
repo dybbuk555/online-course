@@ -15,7 +15,7 @@ const InstructorHeader = (props) => {
           <ul className="navbar-nav flex-row">
             <li className="nav-item mx-2">
               <Link to="/instructor/course" className="nav-link text-white">
-                My coures
+                My course
               </Link>
             </li>
             <li className="nav-item mx-2">

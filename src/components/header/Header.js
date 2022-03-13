@@ -12,7 +12,7 @@ const Header = (props) => {
       return (
         <Fragment>
           <li className="nav-item">
-            <Link to="/instructor/" className="nav-link">
+            <Link to="/instructor/course" className="nav-link">
               My teaching
             </Link>
           </li>

@@ -5,11 +5,46 @@ import {
   SUCCESS,
   FETCH_COURSES,
   FETCH_COURSE,
+  SUBSCRIBE_COURSE,
 } from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
 import { orderBy } from "lodash";
 import history from "./../helpers/history";
+
+export const subscribeCourse = (course) => async (dispatch, getState) => {
+  const state = getState();
+  console.log("current course:", course.title, SUBSCRIBE_COURSE, state);
+  if (!state.auth.isSignedIn) {
+    history.push("/login");
+    dispatch({
+      type: ERROR,
+      payload: "You need to log in to subscribe a course",
+    });
+  } else {
+    console.log("is it ok that axios post without req.body? ");
+    server
+      .post(`/course/${course._id}/subscribe`, {}, { headers: authHeader() })
+      .then((response) => {
+        console.log("successfully subscribe course ");
+        dispatch({
+          type: SUCCESS,
+          payload: `Sucessfully subscribe! course: ${course.title}`,
+        });
+      })
+      .catch((error) => {
+        if (!error.response) {
+          dispatch({
+            type: ERROR,
+            payload: "fail to subscribe course, no response",
+          });
+        } else {
+          console.log("error");
+          dispatch({ type: ERROR, payload: error.response.data.message });
+        }
+      });
+  }
+};
 
 export const fetchCourse = (courseId) => async (dispatch) => {
   console.log("action: fetchCourse", courseId);

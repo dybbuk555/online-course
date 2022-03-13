@@ -29,9 +29,11 @@ class App extends React.Component {
   render() {
     const { alert } = this.props;
     return (
-      <div>
+      <div className="mb-5">
         {alert.message && (
-          <div className={`mb-0 alert ${alert.type}`}>{alert.message}</div>
+          <div className={`fixed-bottom mb-0 alert opacity-50 ${alert.type}`}>
+            {alert.message}
+          </div>
         )}
         <Router history={history}>
           <div>

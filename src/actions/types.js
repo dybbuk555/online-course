@@ -5,6 +5,7 @@ export const ERROR = "ERROR";
 export const CLEAR = "CLEAR";
 
 export const SUBSCRIBE_COURSE = "SUBSCRIBE_COURSE";
+export const UNSUBSCRIBE_COURSE = "UNSUBSCRIBE_COURSE";
 
 export const CREATE_COURSE = "CREATGE_COURSE"; // no needed to be an action
 export const EDIT_COURSE = "EDIT_COURSE";

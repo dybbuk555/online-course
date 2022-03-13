@@ -42,7 +42,7 @@ class CourseEdit extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { course: state.course.data };
+  return { course: state.courses };
 };
 export default connect(mapStateToProps, { editCourse, fetchCourse })(
   CourseEdit

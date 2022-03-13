@@ -6,15 +6,40 @@ import {
   FETCH_COURSES,
   FETCH_COURSE,
   SUBSCRIBE_COURSE,
+  UNSUBSCRIBE_COURSE,
 } from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
 import { orderBy } from "lodash";
 import history from "./../helpers/history";
 
+export const unSubscribeCourse = (course) => async (dispatch) => {
+  server
+    .delete(`/course/${course._id}/subscribe`, { headers: authHeader() })
+    .then((response) => {
+      console.log("successfully unsubscribe course ");
+      console.log(response);
+      dispatch({ type: UNSUBSCRIBE_COURSE, payload: response.data.course });
+      dispatch({
+        type: SUCCESS,
+        payload: `Sucessfully unsubscribe course: ${course.title}!`,
+      });
+    })
+    .catch((error) => {
+      if (!error.response) {
+        dispatch({
+          type: ERROR,
+          payload: "fail to unsubscribe course, no response",
+        });
+      } else {
+        console.log("error");
+        dispatch({ type: ERROR, payload: error.response.data.message });
+      }
+    });
+};
+
 export const subscribeCourse = (course) => async (dispatch, getState) => {
   const state = getState();
-  console.log("current course:", course.title, SUBSCRIBE_COURSE, state);
   if (!state.auth.isSignedIn) {
     history.push("/login");
     dispatch({
@@ -22,14 +47,15 @@ export const subscribeCourse = (course) => async (dispatch, getState) => {
       payload: "You need to log in to subscribe a course",
     });
   } else {
-    console.log("is it ok that axios post without req.body? ");
     server
       .post(`/course/${course._id}/subscribe`, {}, { headers: authHeader() })
       .then((response) => {
         console.log("successfully subscribe course ");
+        console.log(response);
+        dispatch({ type: SUBSCRIBE_COURSE, payload: response.data.course });
         dispatch({
           type: SUCCESS,
-          payload: `Sucessfully subscribe! course: ${course.title}`,
+          payload: `Sucessfully subscribe course: ${course.title}!`,
         });
       })
       .catch((error) => {
@@ -97,16 +123,12 @@ export const sortCourses = (sortBy) => async (dispatch, getState) => {
   let sortedArray;
   if (sortBy === "Instructor") {
     sortedArray = orderBy(
-      getState().course.data,
+      getState().courses,
       (item) => item.instructor.username,
       ["aesc"]
     );
   } else {
-    sortedArray = orderBy(
-      getState().course.data,
-      [sortBy.toLowerCase()],
-      ["aesc"]
-    );
+    sortedArray = orderBy(getState().courses, [sortBy.toLowerCase()], ["aesc"]);
   }
 
   dispatch({ type: FETCH_COURSES, payload: sortedArray });

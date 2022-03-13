@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCourses, subscribeCourse } from "../../actions";
+import {
+  fetchCourses,
+  subscribeCourse,
+  unSubscribeCourse,
+} from "../../actions";
 import courseCatgory from "../../resources/svgs";
 import SortButton from "./SortButton";
 import { Link } from "react-router-dom";
@@ -9,17 +13,22 @@ class CourseShow extends React.Component {
   componentDidMount() {
     const { filterType } = this.props;
     const fetchType = { filtertype: false };
-    if (filterType === "default") {
-      fetchType.filtertype = "default";
-    } else if (filterType === "instructor") {
-      const userId = this.props.auth.user.userId;
-      fetchType.filtertype = "instructor";
-      fetchType.userId = userId;
-    } else if (filterType === "student") {
-      console.log("student fetchType");
+    switch (filterType) {
+      case "default":
+        console.log(fetchType);
+        fetchType.filtertype = "default";
+        break;
+      case "instructor":
+        if (!this.props.auth.isSignedIn) return;
+        const userId = this.props.auth.user.userId;
+        fetchType.filtertype = "instructor";
+        fetchType.userId = userId;
+      case "student":
+        if (!this.props.auth.isSignedIn) return;
     }
     this.props.fetchCourses(fetchType);
   }
+
   functionalButton(course) {
     if (this.props.filterType === "instructor") {
       return (
@@ -31,6 +40,21 @@ class CourseShow extends React.Component {
         </Link>
       );
     } else {
+      if (
+        this.props.auth.isSignedIn &&
+        course.students.indexOf(this.props.auth.user.userId) >= 0
+      ) {
+        return (
+          <button
+            className="btn btn-outline-danger w-100"
+            onClick={() => {
+              this.props.unSubscribeCourse(course);
+            }}
+          >
+            Unsubscribe
+          </button>
+        );
+      }
       return (
         <button
           className="btn btn-outline-primary w-100"
@@ -38,16 +62,16 @@ class CourseShow extends React.Component {
             this.props.subscribeCourse(course);
           }}
         >
-          subscribe
+          Subscribe
         </button>
       );
     }
   }
   renderCourseCard() {
-    const { data } = this.props.course;
+    const { courses } = this.props;
 
-    if (data && data.length > 0) {
-      const courseCards = data.map((course) => {
+    if (courses && courses.length > 0) {
+      const courseCards = courses.map((course) => {
         return (
           <div className="col" key={course._id}>
             <div className="card h-100">
@@ -95,7 +119,7 @@ class CourseShow extends React.Component {
     return (
       <div className="container mt-3">
         <SortButton />
-        <div className="row row-cols-1 row-cols-md-3 g-4 mt-1">
+        <div className="row row-cols-1 row-cols-lg-3 g-4 mt-1">
           {this.renderCourseCard()}
         </div>
       </div>
@@ -107,6 +131,8 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { fetchCourses, subscribeCourse })(
-  CourseShow
-);
+export default connect(mapStateToProps, {
+  fetchCourses,
+  subscribeCourse,
+  unSubscribeCourse,
+})(CourseShow);

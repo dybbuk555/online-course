@@ -10,5 +10,5 @@ export default combineReducers({
   form: formReducer, //**
   streams: streamReducer,
   alert: alertReducer,
-  course: courseReducer,
+  courses: courseReducer,
 });

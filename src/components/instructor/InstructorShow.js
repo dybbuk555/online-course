@@ -5,7 +5,7 @@ class InstructorShow extends React.Component {
   render() {
     return (
       <div>
-        <CourseShow />
+        <CourseShow filterType="instructor" />
       </div>
     );
   }

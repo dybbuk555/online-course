@@ -33,6 +33,7 @@ export const fetchCourse = (courseId) => async (dispatch) => {
 export const fetchCourses =
   ({ userId, filtertype }) =>
   async (dispatch, getState) => {
+    console.log("fffffffetch action filtertype:", filtertype);
     // authHeader is not needed, because all peoeple should be able to access all classes
     // filter = {instructor: userid}  for render instructor's classes
     // filter = {students: username}  for render my class
@@ -58,8 +59,22 @@ export const fetchCourses =
   };
 
 export const sortCourses = (sortBy) => async (dispatch, getState) => {
-  const sortedArry = orderBy(getState().course.data, [sortBy.toLowerCase()]);
-  dispatch({ type: FETCH_COURSES, payload: sortedArry });
+  let sortedArray;
+  if (sortBy === "Instructor") {
+    sortedArray = orderBy(
+      getState().course.data,
+      (item) => item.instructor.username,
+      ["aesc"]
+    );
+  } else {
+    sortedArray = orderBy(
+      getState().course.data,
+      [sortBy.toLowerCase()],
+      ["aesc"]
+    );
+  }
+
+  dispatch({ type: FETCH_COURSES, payload: sortedArray });
 };
 
 export const createCourse = (formValues) => async (dispatch, getState) => {

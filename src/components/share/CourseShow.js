@@ -2,18 +2,19 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchCourses } from "../../actions";
 import courseCatgory from "../../resources/svcs";
-import SortButton from "../../helpers/sortButton";
+import SortButton from "./SortButton";
 import { Link } from "react-router-dom";
 
 class CourseShow extends React.Component {
   componentDidMount() {
     const { filterType } = this.props;
+    console.log("CCCCCCCouseShow didmount filtertype:", filterType, this.props);
     const fetchType = { filtertype: false };
     if (filterType === "default") {
       fetchType.filtertype = "default";
     } else if (filterType === "instructor") {
       const userId = this.props.auth.user.userId;
-      fetchType.filtertype = "instrucor";
+      fetchType.filtertype = "instructor";
       fetchType.userId = userId;
     } else if (filterType === "student") {
       console.log("student fetchType");
@@ -79,4 +80,5 @@ const mapStateToProps = (state) => {
   console.log("the state in course shows:", state);
   return state;
 };
+
 export default connect(mapStateToProps, { fetchCourses })(CourseShow);

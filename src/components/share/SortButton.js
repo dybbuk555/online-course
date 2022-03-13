@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { sortCourses } from "../actions";
+import { sortCourses } from "../../actions";
 
 const SortButton = (props) => {
   const clickHandler = (e) => {
@@ -26,6 +26,7 @@ const SortButton = (props) => {
           <li className="dropdown-item">Title</li>
           <li className="dropdown-item">Category</li>
           <li className="dropdown-item">Price</li>
+          <li className="dropdown-item">Instructor</li>
         </ul>
       </div>
     </div>

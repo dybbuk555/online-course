@@ -119,16 +119,25 @@ export const fetchCourses =
       });
   };
 
-export const sortCourses = (sortBy) => async (dispatch, getState) => {
+export const sortCourses = (sortBy) => (dispatch, getState) => {
   let sortedArray;
-  if (sortBy === "Instructor") {
-    sortedArray = orderBy(
-      getState().courses,
-      (item) => item.instructor.username,
-      ["aesc"]
-    );
-  } else {
-    sortedArray = orderBy(getState().courses, [sortBy.toLowerCase()], ["aesc"]);
+  switch (sortBy) {
+    case "Instructor":
+      sortedArray = orderBy(
+        getState().courses,
+        (item) => item.instructor.username,
+        ["aesc"]
+      );
+      break;
+    case "reverse":
+      sortedArray = getState().courses.slice().reverse();
+      break;
+    default:
+      sortedArray = orderBy(
+        getState().courses,
+        [sortBy.toLowerCase()],
+        ["aesc"]
+      );
   }
 
   dispatch({ type: FETCH_COURSES, payload: sortedArray });

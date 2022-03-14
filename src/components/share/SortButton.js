@@ -8,7 +8,7 @@ const SortButton = (props) => {
   };
   return (
     <div className="row">
-      <div className="dropdown w-auto">
+      <div className="dropdown w-auto col-3">
         <button
           className="btn btn-secondary dropdown-toggle"
           type="button"
@@ -28,6 +28,16 @@ const SortButton = (props) => {
           <li className="dropdown-item">Price</li>
           <li className="dropdown-item">Instructor</li>
         </ul>
+      </div>
+      <div className="col-6">
+        <button
+          className="btn btn-warning"
+          onClick={() => {
+            props.sortCourses("reverse");
+          }}
+        >
+          reverse order
+        </button>
       </div>
     </div>
   );

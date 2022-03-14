@@ -7,19 +7,19 @@ const UserHeader = (props) => {
       <div className="container">
         <div className="align-items-start flex-column">
           <div className="row">
-            <Link to="/" className="navbar-brand">
+            <Link to="/user/course" className="navbar-brand">
               <h3> My learning</h3>
             </Link>
           </div>
 
           <ul className="navbar-nav flex-row">
             <li className="nav-item mx-2">
-              <Link to="/user/all" className="nav-link text-white">
+              <Link to="/user/course" className="nav-link text-white">
                 All coures
               </Link>
             </li>
             <li className="nav-item mx-2">
-              <Link to="/user/data" className="nav-link text-white">
+              <Link to="/user/statistic" className="nav-link text-white">
                 User data
               </Link>
             </li>

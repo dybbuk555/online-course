@@ -24,10 +24,7 @@ const InstructorHeader = (props) => {
               </Link>
             </li>
             <li className="nav-item mx-2">
-              <Link
-                to="/instructor/course/statistic"
-                className="nav-link text-white"
-              >
+              <Link to="/instructor/statistic" className="nav-link text-white">
                 Statistic
               </Link>
             </li>

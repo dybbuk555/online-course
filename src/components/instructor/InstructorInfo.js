@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { fetchCourses } from "../../actions";
 
-class Instructor extends React.Component {
+class InstructorInfo extends React.Component {
   componentDidMount() {
     if (this.props.auth && this.props.auth.isSignedIn) {
       this.props.fetchCourses({
@@ -95,4 +95,4 @@ const mapStateToProps = (state) => {
   return { auth, courses };
 };
 
-export default connect(mapStateToProps, { fetchCourses })(Instructor);
+export default connect(mapStateToProps, { fetchCourses })(InstructorInfo);

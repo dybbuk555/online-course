@@ -5,7 +5,7 @@ import history from "../../helpers/history";
 import { Router, Route, Switch } from "react-router-dom";
 import CourseCreate from "./CourseCreate";
 import CourseEdit from "./CourseEdit";
-import InstructorShow from "./InstructorShow";
+import CourseShow from "../share/CourseShow";
 import InstructorInfo from "./InstructorInfo";
 
 class InstructorPage extends React.Component {
@@ -15,9 +15,14 @@ class InstructorPage extends React.Component {
         <Router history={history}>
           <InstructorHeader />
           <Switch>
-            <Route exact path="/instructor/course/">
-              <InstructorShow />
-            </Route>
+            <Route
+              exact
+              path="/instructor/course/"
+              render={() => {
+                return <CourseShow filterType="instructor" />;
+              }}
+            />
+
             <Route exact path="/instructor/course/new">
               <CourseCreate />
             </Route>
@@ -27,7 +32,7 @@ class InstructorPage extends React.Component {
               component={CourseEdit}
             />
 
-            <Route exact path="/instructor/course/statistic">
+            <Route exact path="/instructor/statistic">
               <InstructorInfo />
             </Route>
           </Switch>

@@ -1,43 +1,31 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import UserHeader from "./UserHeader";
 
 // user route
 import UserLogout from "./UserLogout";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "../../helpers/history";
+import CourseShow from "../share/CourseShow";
+import UserInfo from "./UserInfo";
 
 class UserPage extends React.Component {
   render() {
+    console.log("UUUUUUUUUUser page is rndered");
     return (
       <Fragment>
         <Router history={history}>
           <UserHeader />
-          <h1>user default componenet</h1>
           <Switch>
             <Route path="/user/logout" component={UserLogout} />
             <Route
-              path="/user/all"
+              path="/user/course"
               render={() => {
-                return (
-                  <div>
-                    <h1>user all</h1>
-                  </div>
-                );
+                return <CourseShow filterType="student" />;
+                // use render to pass props
               }}
             />
-
-            <Route
-              path="/user/data"
-              render={() => {
-                return (
-                  <div>
-                    <h1>user data</h1>
-                  </div>
-                );
-              }}
-            />
+            <Route path="/user/statistic" component={UserInfo} />
           </Switch>
         </Router>
       </Fragment>

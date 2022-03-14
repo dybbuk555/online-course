@@ -15,16 +15,18 @@ class CourseShow extends React.Component {
     const fetchType = { filtertype: false };
     switch (filterType) {
       case "default":
-        console.log(fetchType);
         fetchType.filtertype = "default";
         break;
       case "instructor":
         if (!this.props.auth.isSignedIn) return;
-        const userId = this.props.auth.user.userId;
         fetchType.filtertype = "instructor";
-        fetchType.userId = userId;
+        fetchType.userId = this.props.auth.user.userId;
+        break;
       case "student":
         if (!this.props.auth.isSignedIn) return;
+        fetchType.filtertype = "student";
+        fetchType.userId = this.props.auth.user.userId;
+        break;
     }
     this.props.fetchCourses(fetchType);
   }

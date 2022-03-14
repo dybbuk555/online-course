@@ -6,6 +6,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import CourseCreate from "./CourseCreate";
 import CourseEdit from "./CourseEdit";
 import InstructorShow from "./InstructorShow";
+import InstructorInfo from "./InstructorInfo";
 
 class InstructorPage extends React.Component {
   render() {
@@ -27,12 +28,7 @@ class InstructorPage extends React.Component {
             />
 
             <Route exact path="/instructor/course/statistic">
-              <div className="container">
-                <h1>Info about instructor</h1>
-                <h2>Total Class:</h2>
-                <h2> Students count:</h2>
-                <h2> total income: (studentCount*price)</h2>
-              </div>
+              <InstructorInfo />
             </Route>
           </Switch>
         </Router>

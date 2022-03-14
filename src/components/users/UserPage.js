@@ -11,7 +11,6 @@ import UserInfo from "./UserInfo";
 
 class UserPage extends React.Component {
   render() {
-    console.log("UUUUUUUUUUser page is rndered");
     return (
       <Fragment>
         <Router history={history}>

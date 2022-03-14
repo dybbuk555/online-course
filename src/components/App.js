@@ -1,10 +1,3 @@
-import StreamCreate from "./streams/StreamCreate";
-import StreamEdit from "./streams/StreamEdit";
-import StreamDelete from "./streams/StreamDelete";
-import StreamShow from "./streams/StreamShow";
-import StreamList from "./streams/StreamList";
-
-//
 import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import Header from "./header/Header";

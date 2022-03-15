@@ -91,33 +91,33 @@ export const fetchCourse = (courseId) => async (dispatch) => {
     });
 };
 
-export const fetchCourses =
-  ({ userId, filtertype }) =>
-  async (dispatch, getState) => {
-    console.log("fffffffetch action filtertype:", filtertype);
-    // authHeader is not needed, because all peoeple should be able to access all classes
-    // filter = {instructor: userid}  for render instructor's classes
-    // filter = {students: username}  for render my class
-    // filter = {} for render main page
-    server
-      .get("/course", {
-        params: { userId, filtertype },
-      })
-      .then((response) => {
-        console.log("fetch courses response:", response);
-        dispatch({ type: FETCH_COURSES, payload: response.data.courses });
-      })
-      .catch((error) => {
-        if (!error.response) {
-          dispatch({
-            type: ERROR,
-            payload: "fail to fetch courses, no response",
-          });
-        } else {
-          dispatch({ type: ERROR, payload: error.response.data.message });
-        }
-      });
-  };
+export const fetchCourses = (parameters) => async (dispatch, getState) => {
+  const { filterType, userId, keyWord } = parameters;
+
+  console.log("fffffffetch action filtertype:", filterType);
+  // authHeader is not needed, because all peoeple should be able to access all classes
+  // filter = {instructor: userid}  for render instructor's classes
+  // filter = {students: username}  for render my class
+  // filter = {} for render main page
+  server
+    .get("/course", {
+      params: { filterType, userId, keyWord },
+    })
+    .then((response) => {
+      console.log("fetch courses response:", response);
+      dispatch({ type: FETCH_COURSES, payload: response.data.courses });
+    })
+    .catch((error) => {
+      if (!error.response) {
+        dispatch({
+          type: ERROR,
+          payload: "fail to fetch courses, no response",
+        });
+      } else {
+        dispatch({ type: ERROR, payload: error.response.data.message });
+      }
+    });
+};
 
 export const sortCourses = (sortBy) => (dispatch, getState) => {
   let sortedArray;

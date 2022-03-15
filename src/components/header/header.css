@@ -1,3 +1,15 @@
+body {
+  font-family: "Cabin", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+.fontAwesome {
+  font-family: fontawesome;
+}
+
+.iconAwesome {
+  font-size: 1.5em;
+}
+
 li {
   white-space: nowrap;
 }

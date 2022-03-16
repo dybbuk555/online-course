@@ -1,17 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCourses } from "../../actions";
+import history from "../../helpers/history";
 
 // const SearhBar = () => {
 class SearchBar extends React.Component {
   clickHandler(keyWord) {
+    const url = history.location.pathname;
+    const filterType = url.includes("instructor")
+      ? "instructor"
+      : url.includes("user")
+      ? "student"
+      : "default";
     this.props.fetchCourses({
-      filterType: "default",
-      userId: this.props.auth.user ? this.props.auth.user.userId : null,
-      keyWord,
-    });
-    console.log("send keyword:", {
-      filterType: "default",
+      filterType: filterType,
       userId: this.props.auth.user ? this.props.auth.user.userId : null,
       keyWord,
     });

@@ -1,0 +1,21 @@
+.sideBar {
+  background-color: #f6f2f0;
+  position: fixed;
+  top: 20vh;
+  right: 10vh;
+  width: 35vh;
+  height: 70vh;
+}
+/* 
+.detailHeader,
+.detailBody {
+  position: "relative";
+  top: "5vh";
+  left: "15vh";
+} */
+
+.detailHeader div {
+  position: relative;
+  top: 5vh;
+  left: 15vh;
+}

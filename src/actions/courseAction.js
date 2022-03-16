@@ -96,7 +96,7 @@ export const fetchCourses = (parameters) => async (dispatch, getState) => {
 
   console.log("fffffffetch action filtertype:", filterType);
   // authHeader is not needed, because all peoeple should be able to access all classes
-  // filter = {instructor: userid}  for render instructor's classes
+  // filter = {instructor: userId}  for render instructor's classes
   // filter = {students: username}  for render my class
   // filter = {} for render main page
   server

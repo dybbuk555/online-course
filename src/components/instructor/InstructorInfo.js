@@ -12,6 +12,7 @@ class InstructorInfo extends React.Component {
     }
   }
   statisticFunction(courses) {
+    if (typeof courses !== "object") return {};
     const courseCategories = {};
     // courseCateories ={Software:{count:5,categorIncome:20000}}
     const categoryRender = [];

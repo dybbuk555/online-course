@@ -5,6 +5,7 @@ import UserRegister from "./users/UserRegister";
 import UserLogin from "./users/UserLogin";
 import UserPage from "./users/UserPage";
 import InstructorPage from "./instructor/InstructorPage";
+import CourseDetail from "./share/CourseDetail";
 import history from "../helpers/history";
 import PrivateRoute from "./PrivateRoute";
 import { messageClear } from "../actions";
@@ -41,6 +42,11 @@ class App extends React.Component {
               <Route exact path="/">
                 <MainPage />
               </Route>
+              <Route
+                exact
+                path="/course/:courseId/detail"
+                component={CourseDetail}
+              ></Route>
 
               {/* protected route */}
               <PrivateRoute path="/instructor" component={InstructorPage} />

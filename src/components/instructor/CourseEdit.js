@@ -14,12 +14,6 @@ class CourseEdit extends React.Component {
   };
 
   render() {
-    console.log(
-      "state:",
-      this.props.course,
-      pick(this.props.course, "title", "price")
-    );
-
     return (
       <div className="container mt-5 justify-content-center">
         <h1> Edit course</h1>

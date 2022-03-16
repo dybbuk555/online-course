@@ -12,22 +12,6 @@ import { Link } from "react-router-dom";
 class CourseShow extends React.Component {
   componentDidMount() {
     const { filterType } = this.props;
-    // const fetchType = { filtertype: false };
-    // switch (filterType) {
-    //   case "default":
-    //     fetchType.filtertype = "default";
-    //     break;
-    //   case "instructor":
-    //     if (!this.props.auth.isSignedIn) return;
-    //     fetchType.filtertype = "instructor";
-    //     fetchType.userId = this.props.auth.user.userId;
-    //     break;
-    //   case "student":
-    //     if (!this.props.auth.isSignedIn) return;
-    //     fetchType.filtertype = "student";
-    //     fetchType.userId = this.props.auth.user.userId;
-    //     break;
-    // }
     this.props.fetchCourses({
       filterType,
       userId: this.props.auth.user ? this.props.auth.user.userId : null,
@@ -101,9 +85,15 @@ class CourseShow extends React.Component {
               <div className="card-body">
                 <div className="row">
                   <div className="col-6 p-0">
-                    <button className="btn btn-outline-success w-100">
+                    <Link
+                      className="btn btn-outline-success w-100"
+                      to={`/course/${course._id}/detail`}
+                    >
                       Detail
-                    </button>
+                    </Link>
+                    {/* <button className="btn btn-outline-success w-100">
+                      Detail
+                    </button> */}
                   </div>
                   <div className="col-6 p-0">
                     {this.functionalButton(course)}

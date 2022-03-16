@@ -7,6 +7,8 @@ import history from "../../helpers/history";
 class SearchBar extends React.Component {
   clickHandler(keyWord) {
     const url = history.location.pathname;
+    // becase data is shared between show, statistic
+    if (url.includes("statistic")) return;
     const filterType = url.includes("instructor")
       ? "instructor"
       : url.includes("user")
@@ -29,6 +31,7 @@ class SearchBar extends React.Component {
           if (e.key === "Enter") {
             console.log(e.target.value);
             this.clickHandler(e.target.value);
+            e.target.value = "";
           }
         }}
       />

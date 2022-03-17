@@ -21,14 +21,15 @@
   width: 60vw;
 }
 
+.commentCard {
+  width: 30vw;
+}
+
 ul {
   list-style-type: none;
 }
 
 @media screen and (max-width: 1350px) {
-  body {
-    background-color: violet;
-  }
   .sideBar {
     width: 35vh;
     right: 5vh;
@@ -37,9 +38,6 @@ ul {
 }
 
 @media screen and (max-width: 1100px) {
-  body {
-    background-color: greenyellow;
-  }
   .detailHeaderBg {
     display: flex;
     justify-content: center;

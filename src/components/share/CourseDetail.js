@@ -106,6 +106,48 @@ class CourseDetail extends React.Component {
       </div>
     );
   }
+
+  renderComment() {
+    return (
+      <div class="container mt-5">
+        <div class="row d-flex ">
+          {/* first card */}
+          <div class="card p-3 commentCard col-3 ">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="user d-flex flex-row align-items-center">
+                <div className="fontAwesome">&#xf007;</div>
+                <span>
+                  <small class="font-weight-bold text-primary">
+                    james_olesenn
+                  </small>{" "}
+                </span>{" "}
+              </div>{" "}
+              <small>2 days ago</small>
+            </div>
+            <div class="action d-flex justify-content-between mt-2 align-items-center">
+              <div class="reply px-4">
+                <p>
+                  this is aaaaaaaaaawesome!!! Lorem ipsum dolor sit amet
+                  consectetur adipisicing elit. Omnis, accusantium quidem
+                  excepturi iure adipisci asperiores aut fugit voluptatum id
+                  harum commodi expedita alias architecto. Cum neque voluptatem
+                  assumenda expedita vel.
+                </p>
+              </div>
+              <div class="icons align-items-center">
+                {" "}
+                <i class="fa fa-star text-warning"></i>{" "}
+                <i class="fa fa-check-circle-o check-icon"></i>{" "}
+              </div>
+            </div>
+          </div>
+
+          {/* next card here */}
+        </div>
+      </div>
+    );
+  }
+
   render() {
     if (Array.isArray(this.props.course)) {
       return <Fragment></Fragment>;
@@ -136,12 +178,13 @@ class CourseDetail extends React.Component {
             <div className="card-body">{this.contentRender(course)}</div>
           </div>
 
-          <div
+          {this.renderComment(course)}
+          {/* <div
             className="bg-danger commentArea"
             style={{ width: "500px", height: "300px" }}
           >
             <h3>comment area to be continued</h3>
-          </div>
+          </div> */}
         </div>
       </Fragment>
     );

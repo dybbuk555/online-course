@@ -7,13 +7,12 @@ export const CLEAR = "CLEAR";
 export const SUBSCRIBE_COURSE = "SUBSCRIBE_COURSE";
 export const UNSUBSCRIBE_COURSE = "UNSUBSCRIBE_COURSE";
 
-export const CREATE_COURSE = "CREATGE_COURSE"; // no needed to be an action
+export const CREATE_COURSE = "CREATE_COURSE"; // no needed to be an action
 export const EDIT_COURSE = "EDIT_COURSE";
 export const FETCH_COURSE = "FETCH_COURSE";
 export const FETCH_COURSES = "FETCH_COURSES";
 
-export const CREATE_STREAM = "CREATE_STREAM";
-export const FETCH_STREAMS = "FETCH_STREAMS";
-export const FETCH_STREAM = "FETCH_STREAM";
-export const DELETE_STREAM = "DELETE_STREAM";
-export const EDIT_STREAM = "EDIT_STREAM";
+export const CREATE_REVIEW = "CREATE_REVIEW";
+export const EDIT_REVIEW = "EDIT_REVIEW";
+export const FETCH_REVIEW = "FETCH_REVIEW";
+//export const DELTE_REVIEW = "DELTE_REVIEW"

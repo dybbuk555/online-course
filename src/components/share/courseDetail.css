@@ -2,8 +2,8 @@
   background-color: #f6f2f0;
   position: fixed;
   top: 20vh;
-  right: 10vh;
-  width: 35vh;
+  right: 15vh;
+  width: 40vh;
   height: 70vh;
 }
 /* 
@@ -14,8 +14,18 @@
   left: "15vh";
 } */
 
-.detailHeader div {
-  position: relative;
+.detailHeader {
+  margin-left: 15vh;
+  padding-top: 5vh;
+  /* position: relative;
   top: 5vh;
+  left: 15vh; */
+}
+
+.detailBody .card {
   left: 15vh;
+}
+
+ul {
+  list-style-type: none;
 }

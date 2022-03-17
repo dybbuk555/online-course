@@ -26,6 +26,40 @@ class CourseDetail extends React.Component {
       );
     }
   }
+
+  renderSideBar(course) {
+    return (
+      <div className="sideBar text-center">
+        <img
+          src={courseCatgory[course.category.toLowerCase()]}
+          className="card-img-top"
+          alt="cousre image"
+        />
+        <p className="mt-3">
+          <span className="fs-3">{course.price}$</span>
+          {/* hide when the promotion time over */}
+          <small>
+            <del> {course.price * 4}$</del> 75% off
+          </small>
+        </p>
+        <button className="btn btn-outline-warning w-75 mt-3">
+          <h5> Go to cart</h5>
+        </button>
+        <button className="btn btn-outline-primary w-75 my-3">
+          <h5> Subscribe now</h5>
+        </button>
+
+        <h5>This course includes: </h5>
+        <ul className="fontAwesome px-3 text-start">
+          <li className="list-group-item px-4"> &#xf03d; 2 hours content</li>
+
+          <li className="list-group-item px-4"> &#xf02d; 3 articles</li>
+          <li className="list-group-item px-4"> &#xf15b; 5 files</li>
+        </ul>
+      </div>
+    );
+  }
+
   contentRender(course) {
     let seeds =
       course.title[0].charCodeAt() +
@@ -47,9 +81,9 @@ class CourseDetail extends React.Component {
       );
     });
   }
-  renderLearn(n = 6) {
+  renderLearn() {
     return (
-      <div className="mx-5 fontAwesome">
+      <div className="fontAwesome">
         <div className="row">
           <div className="col-6">
             &#xf00c; reprehenderit mollitia quae incidunt perspiciatis ipsa{" "}
@@ -79,14 +113,14 @@ class CourseDetail extends React.Component {
     const course = this.props.course;
     return (
       <Fragment>
-        <div className="bg-dark" style={{ height: "35vh" }}>
+        <div className="bg-dark detailHeaderBg">
           <div className="text-light text-wrapped detailHeader">
             {this.detailHeader(course)}
           </div>
         </div>
-
-        <div className="detailBody mt-5">
-          <div className="card my-5" style={{ width: "60vw" }}>
+        {this.renderSideBar(course)}
+        <div className="detailBody mt-3">
+          <div className="card my-3">
             <div className="card-body">
               <h3>
                 <strong>What you will learn:</strong>
@@ -95,7 +129,7 @@ class CourseDetail extends React.Component {
             </div>
           </div>
 
-          <div className="card" style={{ width: "60vw" }}>
+          <div className="card">
             <div className="card-header">
               <h2>course content</h2>
             </div>
@@ -108,41 +142,6 @@ class CourseDetail extends React.Component {
           >
             <h3>comment area to be continued</h3>
           </div>
-        </div>
-
-        <div className="sideBar text-center">
-          <img
-            src={courseCatgory[course.category.toLowerCase()]}
-            className="card-img-top"
-            alt="cousre image"
-            style={{
-              position: "relative",
-              width: "99%",
-
-              top: "0.2%",
-            }}
-          />
-          <p className="mt-3">
-            <span className="fs-3">{course.price}$</span>
-            {/* hide when the promotion time over */}
-            <small>
-              <del> {course.price * 4}$</del> 75% off
-            </small>
-          </p>
-          <button className="btn btn-outline-warning w-75 mt-3">
-            <h5> Go to cart</h5>
-          </button>
-          <button className="btn btn-outline-primary w-75 my-3">
-            <h5> Subscribe now</h5>
-          </button>
-
-          <h5>This course includes: </h5>
-          <ul className="fontAwesome px-3 text-start">
-            <li className="list-group-item px-4"> &#xf03d; 2 hours content</li>
-
-            <li className="list-group-item px-4"> &#xf02d; 3 articles</li>
-            <li className="list-group-item px-4"> &#xf15b; 5 files</li>
-          </ul>
         </div>
       </Fragment>
     );

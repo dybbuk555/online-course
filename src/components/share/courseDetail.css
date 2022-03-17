@@ -2,30 +2,70 @@
   background-color: #f6f2f0;
   position: fixed;
   top: 20vh;
-  right: 15vh;
+  right: 10vh;
   width: 40vh;
-  height: 70vh;
+  height: 75vh;
 }
-/* 
-.detailHeader,
-.detailBody {
-  position: "relative";
-  top: "5vh";
-  left: "15vh";
-} */
+
+.detailHeaderBg {
+  height: 35vh;
+}
 
 .detailHeader {
   margin-left: 15vh;
   padding-top: 5vh;
-  /* position: relative;
-  top: 5vh;
-  left: 15vh; */
 }
 
 .detailBody .card {
-  left: 15vh;
+  margin-left: 10vh;
+  width: 60vw;
 }
 
 ul {
   list-style-type: none;
+}
+
+@media screen and (max-width: 1350px) {
+  body {
+    background-color: violet;
+  }
+  .sideBar {
+    width: 35vh;
+    right: 5vh;
+    height: 75vh;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  body {
+    background-color: greenyellow;
+  }
+  .detailHeaderBg {
+    display: flex;
+    justify-content: center;
+  }
+
+  .detailHeader {
+    margin-left: 0;
+  }
+
+  .sideBar {
+    position: static;
+    width: 55vw;
+    margin: auto;
+    margin-bottom: 25px;
+    height: 90vh;
+  }
+
+  .detailBody .card {
+    margin: auto;
+    width: 90vw;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sideBar {
+    width: 80vw;
+  }
 }

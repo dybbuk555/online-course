@@ -47,6 +47,11 @@ class App extends React.Component {
                 path="/course/:courseId/detail"
                 component={CourseDetail}
               ></Route>
+              {/* <Route
+                exact
+                path="/course/:courseId/detail"
+                render={(props) => <CourseDetail {...props} />}
+              /> */}
 
               {/* protected route */}
               <PrivateRoute path="/instructor" component={InstructorPage} />

@@ -107,43 +107,90 @@ class CourseDetail extends React.Component {
     );
   }
 
-  renderComment() {
-    return (
-      <div class="container mt-5">
-        <div class="row d-flex ">
-          {/* first card */}
-          <div class="card p-3 commentCard col-3 ">
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="user d-flex flex-row align-items-center">
-                <div className="fontAwesome">&#xf007;</div>
-                <span>
-                  <small class="font-weight-bold text-primary">
-                    james_olesenn
-                  </small>{" "}
-                </span>{" "}
-              </div>{" "}
-              <small>2 days ago</small>
+  renderComments(course) {
+    return Array.apply(null, Array(3)).map((empty, ind) => {
+      return (
+        <div className="card m-0 mt-2 p-3" key={ind}>
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="user d-flex flex-row align-items-center">
+              <div className="fontAwesome">&#xf007;</div>
+              <span>
+                <small className="font-weight-bold text-primary">
+                  james_olesenn
+                </small>{" "}
+              </span>{" "}
+            </div>{" "}
+            <small>2 days ago</small>
+          </div>
+          <div className=" d-flex justify-content-between mt-2 align-items-center">
+            <div className="px-4">
+              <p>
+                this is aaaaaaaaaawesome!!! Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Omnis, accusantium quidem
+                excepturi iure adipisci asperiores aut fugit voluptatum id harum
+                commodi expedita alias architecto. Cum neque voluptatem
+                assumenda expedita vel.
+              </p>
             </div>
-            <div class="action d-flex justify-content-between mt-2 align-items-center">
-              <div class="reply px-4">
-                <p>
-                  this is aaaaaaaaaawesome!!! Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Omnis, accusantium quidem
-                  excepturi iure adipisci asperiores aut fugit voluptatum id
-                  harum commodi expedita alias architecto. Cum neque voluptatem
-                  assumenda expedita vel.
-                </p>
-              </div>
-              <div class="icons align-items-center">
-                {" "}
-                <i class="fa fa-star text-warning"></i>{" "}
-                <i class="fa fa-check-circle-o check-icon"></i>{" "}
-              </div>
+            <div className="icons align-items-center">
+              {" "}
+              <i className="fa fa-star text-warning"></i>{" "}
+              <i className="fa fa-check-circle-o check-icon"></i>{" "}
             </div>
           </div>
-
-          {/* next card here */}
         </div>
+      );
+    });
+  }
+
+  renderCommentArea(course) {
+    return (
+      <div className="commentArea mt-5">
+        <h1>Comments:</h1>
+        {/* leave comment */}
+        <div className="leaveComment">
+          <div className="card m-0">
+            <form action="" className="p-0">
+              <h3 className="mx-2">Leave a comment:</h3>
+              <div className="d-flex">
+                <h5>Rating:</h5>
+                <div className="rating">
+                  <input type="radio" name="rating" value="5" id="5" />
+                  <label htmlFor="5">☆</label>{" "}
+                  <input type="radio" name="rating" value="4" id="4" />
+                  <label htmlFor="4">☆</label>{" "}
+                  <input type="radio" name="rating" value="3" id="3" />
+                  <label htmlFor="3">☆</label>{" "}
+                  <input type="radio" name="rating" value="2" id="2" />
+                  <label htmlFor="2">☆</label>{" "}
+                  <input type="radio" name="rating" value="1" id="1" />
+                  <label htmlFor="1">☆</label>{" "}
+                </div>
+              </div>
+              <div className="row ">
+                <div className="col-7 py-0">
+                  <textarea
+                    placeholder="I would like to say that..."
+                    name=""
+                    id=""
+                  ></textarea>
+                </div>
+                <div className="col-3 d-flex flex-column justify-content-between p-2">
+                  <div className="m-0">
+                    <button className="btn btn-danger">cancel</button>
+                  </div>
+                  <div className=" m-0 ">
+                    <button className="btn btn-success">submit</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        {/* leave comment */}
+
+        <h3 className="mx-2">Other comments:</h3>
+        {this.renderComments(course)}
       </div>
     );
   }
@@ -177,14 +224,7 @@ class CourseDetail extends React.Component {
             </div>
             <div className="card-body">{this.contentRender(course)}</div>
           </div>
-
-          {this.renderComment(course)}
-          {/* <div
-            className="bg-danger commentArea"
-            style={{ width: "500px", height: "300px" }}
-          >
-            <h3>comment area to be continued</h3>
-          </div> */}
+          {this.renderCommentArea(course)}
         </div>
       </Fragment>
     );

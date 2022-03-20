@@ -4,14 +4,15 @@ import { fetchCourse } from "../../actions";
 import "./courseDetail.css";
 import courseCatgory from "../../resources/svgs";
 import ReviewForm from "./ReviewForm";
+import { createReview } from "../../actions/reviewAction";
 
 class CourseDetail extends React.Component {
   componentDidMount() {
     this.props.fetchCourse(this.props.match.params.courseId);
   }
   onSubmit = (formValues) => {
-    console.log("submit review:", formValues);
-    // this.props.createReview(formValues);
+    formValues.courseId = this.props.course._id;
+    this.props.createReview(formValues);
   };
 
   detailHeader(course) {
@@ -202,4 +203,6 @@ class CourseDetail extends React.Component {
 const mapStateToProps = (state) => {
   return { course: state.courses };
 };
-export default connect(mapStateToProps, { fetchCourse })(CourseDetail);
+export default connect(mapStateToProps, { fetchCourse, createReview })(
+  CourseDetail
+);

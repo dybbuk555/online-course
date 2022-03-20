@@ -115,29 +115,47 @@ class CourseDetail extends React.Component {
   }
 
   renderComments(course) {
-    return Array.apply(null, Array(3)).map((empty, ind) => {
+    if (course.reviews.length === 0) {
+      return <h1>There are no comments...</h1>;
+    }
+    function renderStars(n) {
+      return Array.apply(null, Array(5)).map((empty, ind) => {
+        return ind < n ? <h5 className="starMark"></h5> : <h5>☆</h5>;
+      });
+    }
+
+    function renderTimeDiff(time) {
+      console.log(time);
+      const reviewTime = Date.parse(time);
+      const timeDiff = Math.floor((Date.now() - reviewTime) / 1000 / 3600);
+
+      return timeDiff < 24
+        ? timeDiff + " hours ago"
+        : Math.floor(timeDiff / 24).toString() + "days ago";
+    }
+
+    return course.reviews.map((review, ind) => {
       return (
         <div className="card m-0 mt-2 p-3" key={ind}>
           <div className="d-flex justify-content-between align-items-center">
             <div className="user d-flex flex-row align-items-center">
               <div className="fontAwesome">&#xf007;</div>
               <span className="mx-2">
-                <small className="font-weight-bold text-primary">
-                  james_olesenn
-                </small>{" "}
+                <div className="font-weight-bold text-primary">
+                  {review.reviewer}
+                </div>{" "}
               </span>{" "}
             </div>{" "}
-            <small>2 days ago</small>
+            <small> {renderTimeDiff(review.date)}</small>
           </div>
+
+          <div className="d-flex justify-content-strat mx-3">
+            {renderStars(review.rating)}
+          </div>
+
           <div className=" d-flex justify-content-between mt-2 align-items-center">
             <div className="px-4">
-              <p className="txtIndent">
-                this is aaaaaaaaaawesome!!! Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Omnis, accusantium quidem
-                excepturi iure adipisci asperiores aut fugit voluptatum id harum
-                commodi expedita alias architecto. Cum neque voluptatem
-                assumenda expedita vel.
-              </p>
+              <p className="txtIndent">{review.content}</p>
             </div>
             <div className="icons align-items-center">
               {" "}
@@ -168,7 +186,9 @@ class CourseDetail extends React.Component {
     if (Array.isArray(this.props.course)) {
       return <Fragment></Fragment>;
     }
+
     const course = this.props.course;
+    console.log(course);
     return (
       <Fragment>
         <div className="bg-dark detailHeaderBg">

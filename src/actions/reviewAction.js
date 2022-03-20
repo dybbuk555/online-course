@@ -7,7 +7,7 @@ export const createReview = (formValues) => async (dispatch, getState) => {
   server
     .post("/review", { formValues }, { headers: authHeader() })
     .then((response) => {
-      //history.push("/instructor/course"); // avoid clearing alert message
+      history.go(0);
       dispatch({ type: SUCCESS, payload: "Review created successfully" });
     })
     .catch((error) => {

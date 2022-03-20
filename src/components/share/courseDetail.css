@@ -68,6 +68,11 @@
   opacity: 0.4;
 }
 
+.starMark::before {
+  content: "\2605";
+  color: orange;
+}
+
 ul {
   list-style-type: none;
 }
@@ -115,5 +120,9 @@ ul {
 @media screen and (max-width: 600px) {
   .sideBar {
     width: 80vw;
+    height: 70vh;
+  }
+  .detailHeaderBg {
+    height: 30vh;
   }
 }

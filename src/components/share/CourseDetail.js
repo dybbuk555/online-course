@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { fetchCourse } from "../../actions";
+import { fetchCourse, subscribeCourse, unSubscribeCourse } from "../../actions";
 import "./courseDetail.css";
 import courseCatgory from "../../resources/svgs";
 import ReviewForm from "./ReviewForm";
@@ -8,6 +8,7 @@ import { createReview } from "../../actions/reviewAction";
 
 class CourseDetail extends React.Component {
   componentDidMount() {
+    console.log("Ffffffffffffftech course");
     this.props.fetchCourse(this.props.match.params.courseId);
   }
   onSubmit = (formValues) => {
@@ -16,8 +17,6 @@ class CourseDetail extends React.Component {
   };
 
   detailHeader(course) {
-    console.log(this.props);
-
     if (!Array.isArray(course)) {
       return (
         <Fragment>
@@ -35,7 +34,6 @@ class CourseDetail extends React.Component {
   }
 
   renderPromation(course) {
-    console.log(this.props);
     if (this.props.newStudent.timeDiff) {
       return (
         <Fragment>
@@ -50,6 +48,36 @@ class CourseDetail extends React.Component {
       return <Fragment>Price: {course.price} $</Fragment>;
     }
   }
+
+  renderSubscribeBtn(course) {
+    console.log(course);
+    if (
+      this.props.auth.isSignedIn &&
+      course.students.indexOf(this.props.auth.user.userId) >= 0
+    ) {
+      return (
+        <button
+          className="btn btn-outline-danger w-75 my-3"
+          onClick={() => {
+            this.props.unSubscribeCourse(course);
+          }}
+        >
+          Unsubscribe
+        </button>
+      );
+    }
+    return (
+      <button
+        className="btn btn-outline-primary w-75 my-3"
+        onClick={() => {
+          this.props.subscribeCourse(course);
+        }}
+      >
+        Subscribe
+      </button>
+    );
+  }
+
   renderSideBar(course) {
     return (
       <div className="sideBar text-center">
@@ -62,9 +90,10 @@ class CourseDetail extends React.Component {
         <button className="btn btn-outline-warning w-75 mt-3">
           <h5> Go to cart</h5>
         </button>
-        <button className="btn btn-outline-primary w-75 my-3">
+        {this.renderSubscribeBtn(course)}
+        {/* <button className="btn btn-outline-primary w-75 my-3">
           <h5> Subscribe now</h5>
-        </button>
+        </button> */}
 
         <h5>This course includes: </h5>
         <ul className="fontAwesome px-3 text-start">
@@ -83,7 +112,6 @@ class CourseDetail extends React.Component {
       course.title[1].charCodeAt() * 3 +
       course.title[2].charCodeAt() * 2;
     seeds = 6 + Math.floor(seeds % 10);
-    console.log(seeds);
     return Array.apply(null, Array(seeds)).map((empty, ind) => {
       return (
         <div key={ind}>
@@ -139,7 +167,6 @@ class CourseDetail extends React.Component {
     }
 
     function renderTimeDiff(time) {
-      console.log(time);
       const reviewTime = Date.parse(time);
       const timeDiff = Math.floor((Date.now() - reviewTime) / 1000 / 3600);
 
@@ -203,6 +230,10 @@ class CourseDetail extends React.Component {
 
     const course = this.props.course;
     console.log(course);
+    if (!course) {
+      return null;
+    }
+
     return (
       <Fragment>
         <div className="bg-dark detailHeaderBg">
@@ -235,8 +266,17 @@ class CourseDetail extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { course: state.courses, newStudent: state.newStudent };
+  console.log("mapStateToProps", state.courses);
+
+  return {
+    course: state.courses.length ? state.courses[0] : false,
+    newStudent: state.newStudent,
+    auth: state.auth,
+  };
 };
-export default connect(mapStateToProps, { fetchCourse, createReview })(
-  CourseDetail
-);
+export default connect(mapStateToProps, {
+  fetchCourse,
+  createReview,
+  subscribeCourse,
+  unSubscribeCourse,
+})(CourseDetail);

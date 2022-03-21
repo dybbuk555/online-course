@@ -12,6 +12,7 @@ import { messageClear } from "../actions";
 import { connect } from "react-redux";
 import MainPage from "./main/MainPage";
 import SpecialOffer from "./share/SpecialOffer";
+import ErrorBoundary from "./share/ErrorBoundary";
 
 class App extends React.Component {
   constructor(props) {
@@ -24,37 +25,39 @@ class App extends React.Component {
   render() {
     const { alert } = this.props;
     return (
-      <div className="mb-5">
-        {alert.message && (
-          <div className={`fixed-bottom mb-0 alert opacity-50 ${alert.type}`}>
-            {alert.message}
-          </div>
-        )}
-        <Router history={history}>
-          <div>
-            <SpecialOffer />
-            <Header />
-            <Switch>
-              <Route path="/register">
-                <UserRegister />
-              </Route>
-              <Route path="/login">
-                <UserLogin />
-              </Route>
-              <Route exact path="/">
-                <MainPage />
-              </Route>
-              <Route
-                exact
-                path="/course/:courseId/detail"
-                component={CourseDetail}
-              ></Route>
-              <PrivateRoute path="/instructor" component={InstructorPage} />
-              <PrivateRoute path="/user/" component={UserPage} />
-            </Switch>
-          </div>
-        </Router>
-      </div>
+      <ErrorBoundary>
+        <div className="mb-5">
+          {alert.message && (
+            <div className={`fixed-bottom mb-0 alert opacity-50 ${alert.type}`}>
+              {alert.message}
+            </div>
+          )}
+          <Router history={history}>
+            <div>
+              <SpecialOffer />
+              <Header />
+              <Switch>
+                <Route path="/register">
+                  <UserRegister />
+                </Route>
+                <Route path="/login">
+                  <UserLogin />
+                </Route>
+                <Route exact path="/">
+                  <MainPage />
+                </Route>
+                <Route
+                  exact
+                  path="/course/:courseId/detail"
+                  component={CourseDetail}
+                ></Route>
+                <PrivateRoute path="/instructor" component={InstructorPage} />
+                <PrivateRoute path="/user/" component={UserPage} />
+              </Switch>
+            </div>
+          </Router>
+        </div>
+      </ErrorBoundary>
     );
   }
 }

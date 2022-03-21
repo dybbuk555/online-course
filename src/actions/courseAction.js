@@ -20,7 +20,7 @@ export const unSubscribeCourse = (course) => async (dispatch) => {
       console.log("successfully unsubscribe course ");
       console.log(response);
       dispatch({ type: UNSUBSCRIBE_COURSE, payload: response.data.course });
-
+      // history.go(0);
       dispatch({
         type: SUCCESS,
         payload: `Sucessfully unsubscribe course: ${course.title}!`,
@@ -28,6 +28,7 @@ export const unSubscribeCourse = (course) => async (dispatch) => {
     })
     .catch((error) => {
       if (!error.response) {
+        console.log(error);
         dispatch({
           type: ERROR,
           payload: "fail to unsubscribe course, no response",
@@ -54,12 +55,14 @@ export const subscribeCourse = (course) => async (dispatch, getState) => {
         console.log("successfully subscribe course ");
         console.log(response);
         dispatch({ type: SUBSCRIBE_COURSE, payload: response.data.course });
+        // history.go(0);
         dispatch({
           type: SUCCESS,
           payload: `Sucessfully subscribe course: ${course.title}!`,
         });
       })
       .catch((error) => {
+        console.log("errorrrrrrr:", error);
         if (!error.response) {
           dispatch({
             type: ERROR,
@@ -78,7 +81,8 @@ export const fetchCourse = (courseId) => async (dispatch) => {
   server
     .get(`/course/${courseId}`)
     .then((response) => {
-      dispatch({ type: FETCH_COURSE, payload: response.data.course });
+      // to keep action state consistent => use array to store course
+      dispatch({ type: FETCH_COURSE, payload: [response.data.course] });
     })
     .catch((error) => {
       if (!error.response) {
@@ -110,6 +114,7 @@ export const fetchCourses = (parameters) => async (dispatch, getState) => {
     })
     .catch((error) => {
       if (!error.response) {
+        console.log(error);
         dispatch({
           type: ERROR,
           payload: "fail to fetch courses, no response",

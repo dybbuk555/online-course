@@ -20,6 +20,7 @@ export const unSubscribeCourse = (course) => async (dispatch) => {
       console.log("successfully unsubscribe course ");
       console.log(response);
       dispatch({ type: UNSUBSCRIBE_COURSE, payload: response.data.course });
+
       dispatch({
         type: SUCCESS,
         payload: `Sucessfully unsubscribe course: ${course.title}!`,

@@ -15,4 +15,7 @@ export const FETCH_COURSES = "FETCH_COURSES";
 export const CREATE_REVIEW = "CREATE_REVIEW";
 export const EDIT_REVIEW = "EDIT_REVIEW";
 export const FETCH_REVIEW = "FETCH_REVIEW";
+
+export const CHECK_NEWSTUDENT = "CHECK_NEWSTUDENT";
+
 //export const DELTE_REVIEW = "DELTE_REVIEW"

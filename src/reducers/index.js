@@ -4,6 +4,7 @@ import authReducer from "./authReducer";
 import streamReducer from "./streamReducer";
 import alertReducer from "./alertReducer";
 import courseReducer from "./courseReducer";
+import specialOfferReducer from "./specialOfferReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   streams: streamReducer,
   alert: alertReducer,
   courses: courseReducer,
+  newStudent: specialOfferReducer,
 });

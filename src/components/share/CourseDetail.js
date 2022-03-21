@@ -34,6 +34,22 @@ class CourseDetail extends React.Component {
     }
   }
 
+  renderPromation(course) {
+    console.log(this.props);
+    if (this.props.newStudent.timeDiff) {
+      return (
+        <Fragment>
+          <span className="fs-3">{course.price}$</span>
+
+          <small className="mx-2">
+            <del> {course.price * 4}$</del> 75% off
+          </small>
+        </Fragment>
+      );
+    } else {
+      return <Fragment>Price: {course.price} $</Fragment>;
+    }
+  }
   renderSideBar(course) {
     return (
       <div className="sideBar text-center">
@@ -42,13 +58,7 @@ class CourseDetail extends React.Component {
           className="card-img-top"
           alt="cousre image"
         />
-        <p className="mt-3">
-          <span className="fs-3">{course.price}$</span>
-          {/* hide when the promotion time over */}
-          <small>
-            <del> {course.price * 4}$</del> 75% off
-          </small>
-        </p>
+        <p className="mt-3">{this.renderPromation(course)}</p>
         <button className="btn btn-outline-warning w-75 mt-3">
           <h5> Go to cart</h5>
         </button>
@@ -120,7 +130,11 @@ class CourseDetail extends React.Component {
     }
     function renderStars(n) {
       return Array.apply(null, Array(5)).map((empty, ind) => {
-        return ind < n ? <h5 className="starMark"></h5> : <h5>☆</h5>;
+        return ind < n ? (
+          <h5 className="starMark" key={ind}></h5>
+        ) : (
+          <h5 key={ind}>☆</h5>
+        );
       });
     }
 
@@ -221,7 +235,7 @@ class CourseDetail extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { course: state.courses };
+  return { course: state.courses, newStudent: state.newStudent };
 };
 export default connect(mapStateToProps, { fetchCourse, createReview })(
   CourseDetail

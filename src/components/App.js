@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import { messageClear } from "../actions";
 import { connect } from "react-redux";
 import MainPage from "./main/MainPage";
+import SpecialOffer from "./share/SpecialOffer";
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends React.Component {
         )}
         <Router history={history}>
           <div>
+            <SpecialOffer />
             <Header />
             <Switch>
               <Route path="/register">
@@ -47,33 +49,8 @@ class App extends React.Component {
                 path="/course/:courseId/detail"
                 component={CourseDetail}
               ></Route>
-              {/* <Route
-                exact
-                path="/course/:courseId/detail"
-                render={(props) => <CourseDetail {...props} />}
-              /> */}
-
-              {/* protected route */}
               <PrivateRoute path="/instructor" component={InstructorPage} />
               <PrivateRoute path="/user/" component={UserPage} />
-
-              {/* <Route path="/user/register" exact component={UserRegister} />
-              <Route path="/user/register" exact component={UserRegister} />
-              <Route path="/user/login" exact component={UserLogin} />
-              <Route path="/user/logout" exact component={UserLogout} /> */}
-              {/* <Route
-                path="/user/myspace"
-                exact
-                component={<h1>this is my sapce</h1>}
-              /> */}
-
-              {/* <Route path="/user/register" exact component={UserRegister} />
-              <Route path="/user/login" exact component={UserLogin} />
-  
-              <Route path="/streams/new" exact component={StreamCreate} />
-              <Route path="/streams/edit/:id" exact component={StreamEdit} />
-              <Route path="/streams/delete/:id" exact component={StreamDelete} />
-              <Route path="/streams/:id" exact component={StreamShow} /> */}
             </Switch>
           </div>
         </Router>

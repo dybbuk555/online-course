@@ -1,0 +1,9 @@
+.specialOffer {
+  background-color: #eceb98;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}

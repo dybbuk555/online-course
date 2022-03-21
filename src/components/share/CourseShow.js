@@ -56,6 +56,23 @@ class CourseShow extends React.Component {
       );
     }
   }
+
+  renderPromation(course) {
+    if (this.props.newStudent.timeDiff) {
+      return (
+        <li className="list-group-item">
+          <span className="fs-3">{course.price}$</span>
+
+          <small className="mx-2">
+            <del> {course.price * 4}$</del> 75% off
+          </small>
+        </li>
+      );
+    } else {
+      return <li className="list-group-item">Price: {course.price} $</li>;
+    }
+  }
+
   renderCourseCard() {
     const { courses } = this.props;
 
@@ -74,7 +91,8 @@ class CourseShow extends React.Component {
                 <p className="card-text">Description: {course.description}</p>
               </div>
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">Price: {course.price} $</li>
+                {this.renderPromation(course)}
+
                 <li className="list-group-item">
                   Instructor: {course.instructor.username}
                 </li>

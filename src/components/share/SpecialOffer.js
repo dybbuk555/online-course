@@ -4,6 +4,7 @@ import "./specialOffer.css";
 import { checkNewStudent } from "../../actions/specialOfferAction";
 
 class SpecailOffer extends React.Component {
+  // state = { specialOffer: "" };
   componentDidMount() {
     this.props.checkNewStudent();
   }
@@ -13,25 +14,48 @@ class SpecailOffer extends React.Component {
     }, 1000);
   }
 
+  timeParser(timeDiff) {
+    function num2str(num) {
+      return num > 9 ? num.toString() : "0" + num.toString();
+    }
+
+    if (timeDiff < 0) {
+      return "promation is over";
+    } else {
+      const hour = Math.floor(timeDiff / 3600);
+      const min = Math.floor((timeDiff % 3600) / 60);
+      const sec = (timeDiff % 3600) % 60;
+
+      return `${num2str(hour)}:${num2str(min)}:${num2str(sec)}`;
+    }
+  }
+
   render() {
-    if (!this.props.newStudentTimeDiff) {
+    console.log("************special offer render:", this.props);
+    if (!this.props.firstVisited) {
       return null;
     }
-    const timeDiff = new Date(this.props.newStudentTimeDiff * 1000)
-      .toISOString()
-      .slice(11, 19);
+    const timeDiff = Math.floor((this.props.firstVisited - Date.now()) / 1000);
+    const time = this.timeParser(timeDiff);
 
     return (
       <div className="specialOffer">
         <h3>A special Offer for new students</h3>
-        <h3>Ends in {timeDiff}</h3>
+        <h3>Ends in {time}</h3>
       </div>
     );
   }
 }
 const mapStateToProps = (state) => {
-  if (state.newStudent.timeDiff > 0) {
-    return { newStudentTimeDiff: state.newStudent.timeDiff };
+  console.log("mapStateToProps state in special offer", state);
+  if (
+    state.newStudent.firstVisited &&
+    state.newStudent.firstVisited - Date.now() > 0
+  ) {
+    return {
+      firstVisited: state.newStudent.firstVisited,
+      remainTime: state.newStudent.remainTime,
+    };
   } else {
     return {};
   }

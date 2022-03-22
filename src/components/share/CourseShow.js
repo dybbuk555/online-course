@@ -58,7 +58,7 @@ class CourseShow extends React.Component {
   }
 
   renderPromation(course) {
-    if (this.props.newStudent.timeDiff) {
+    if (this.props.newStudent.timeDiff && this.props.newStudent.timeDiff > 0) {
       return (
         <li className="list-group-item">
           <span className="fs-3">{course.price}$</span>

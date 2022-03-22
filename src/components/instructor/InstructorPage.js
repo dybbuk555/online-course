@@ -10,6 +10,7 @@ import InstructorInfo from "./InstructorInfo";
 
 class InstructorPage extends React.Component {
   render() {
+    console.log("################### render course page");
     return (
       <Fragment>
         <Router history={history}>

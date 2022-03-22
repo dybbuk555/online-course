@@ -34,7 +34,7 @@ class CourseDetail extends React.Component {
   }
 
   renderPromation(course) {
-    if (this.props.newStudent.timeDiff) {
+    if (this.props.newStudent.timeDiff && this.props.newStudent.timeDiff > 0) {
       return (
         <Fragment>
           <span className="fs-3">{course.price}$</span>
@@ -50,7 +50,6 @@ class CourseDetail extends React.Component {
   }
 
   renderSubscribeBtn(course) {
-    console.log(course);
     if (
       this.props.auth.isSignedIn &&
       course.students.indexOf(this.props.auth.user.userId) >= 0
@@ -224,12 +223,13 @@ class CourseDetail extends React.Component {
   }
 
   render() {
+    console.log("CCCCCCCCCCCCourse Detail RRRRRRRerender@@@@@@@@@@@@@@");
     if (Array.isArray(this.props.course)) {
       return <Fragment></Fragment>;
     }
 
     const course = this.props.course;
-    console.log(course);
+    console.log("render", course);
     if (!course) {
       return null;
     }
@@ -266,11 +266,11 @@ class CourseDetail extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("mapStateToProps", state.courses);
+  console.log("mapStateToProps in courseDetail", state);
 
   return {
     course: state.courses.length ? state.courses[0] : false,
-    newStudent: state.newStudent,
+    newStudent: state.newStudent.firstVisited,
     auth: state.auth,
   };
 };

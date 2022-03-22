@@ -3,8 +3,11 @@ import { CHECK_NEWSTUDENT } from "../actions/types";
 export default (state = "", action) => {
   switch (action.type) {
     case CHECK_NEWSTUDENT:
-      const timeDiff = Math.floor((action.payload - Date.now()) / 1000);
-      return { timeDiff };
+      // a redundant variable: remainTime is to keep the componentDidMount lifeCycle going
+      return {
+        firstVisited: action.payload,
+        remainTime: action.payload - Date.now(),
+      };
     default:
       return state;
   }

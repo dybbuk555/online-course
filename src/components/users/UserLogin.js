@@ -9,7 +9,6 @@ class UserLogin extends React.Component {
   };
 
   render() {
-    console.log("render", this.props);
     return (
       <div className="container">
         <div className="row mt-5">
@@ -23,9 +22,5 @@ class UserLogin extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  console.log("map state to props:", state);
-  return state;
-};
 
-export default connect(mapStateToProps, { userSignIn })(UserLogin);
+export default connect(null, { userSignIn })(UserLogin);

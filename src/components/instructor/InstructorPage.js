@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { connect } from "react-redux";
 import InstructorHeader from "./InstructorHeader";
 import history from "../../helpers/history";
 import { Router, Route, Switch } from "react-router-dom";
@@ -10,7 +9,6 @@ import InstructorInfo from "./InstructorInfo";
 
 class InstructorPage extends React.Component {
   render() {
-    console.log("################### render course page");
     return (
       <Fragment>
         <Router history={history}>
@@ -43,7 +41,4 @@ class InstructorPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return state;
-};
-export default connect(mapStateToProps, {})(InstructorPage);
+export default InstructorPage;

@@ -141,7 +141,8 @@ class CourseShow extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  const { auth, courses } = state;
+  return { newStudent: state.newStudent.firstVisited, auth, courses };
 };
 
 export default connect(mapStateToProps, {

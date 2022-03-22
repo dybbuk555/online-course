@@ -32,7 +32,4 @@ class UserPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return state;
-};
-export default connect(mapStateToProps, {})(UserPage);
+export default connect(null, {})(UserPage);

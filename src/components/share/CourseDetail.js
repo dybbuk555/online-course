@@ -5,6 +5,7 @@ import "./courseDetail.css";
 import courseCatgory from "../../resources/svgs";
 import ReviewForm from "./ReviewForm";
 import { createReview } from "../../actions/reviewAction";
+import { addShopCart } from "../../actions/shopCartAction";
 
 class CourseDetail extends React.Component {
   componentDidMount() {
@@ -86,8 +87,13 @@ class CourseDetail extends React.Component {
           alt="cousre image"
         />
         <p className="mt-3">{this.renderPromation(course)}</p>
-        <button className="btn btn-outline-warning w-75 mt-3">
-          <h5> Go to cart</h5>
+        <button
+          className="btn btn-outline-warning w-75 mt-3"
+          onClick={() => {
+            this.props.addShopCart(course);
+          }}
+        >
+          <h5> Add to cart</h5>
         </button>
         {this.renderSubscribeBtn(course)}
         {/* <button className="btn btn-outline-primary w-75 my-3">
@@ -266,8 +272,6 @@ class CourseDetail extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("mapStateToProps in courseDetail", state);
-
   return {
     course: state.courses.length ? state.courses[0] : false,
     newStudent: state.newStudent.firstVisited,
@@ -279,4 +283,5 @@ export default connect(mapStateToProps, {
   createReview,
   subscribeCourse,
   unSubscribeCourse,
+  addShopCart,
 })(CourseDetail);

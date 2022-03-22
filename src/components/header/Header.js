@@ -10,17 +10,17 @@ const Header = (props) => {
     if (props.isSignedIn) {
       return (
         <Fragment>
-          <li className="nav-item">
+          <li className="nav-item my-auto">
             <Link to="/instructor/course" className="nav-link">
               <h5> My teaching</h5>
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item my-auto">
             <Link to="/user/course" className="nav-link">
               <h5>My learning</h5>
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item my-auto">
             <Link to="/user/logout" className="nav-link">
               <h5> Log out</h5>
             </Link>
@@ -30,12 +30,12 @@ const Header = (props) => {
     } else {
       return (
         <Fragment>
-          <li className="nav-item">
+          <li className="nav-item my-auto">
             <Link to="/register" className="nav-link">
               Register
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item my-auto">
             <Link to="/login" className="nav-link">
               Log in
             </Link>
@@ -43,6 +43,28 @@ const Header = (props) => {
         </Fragment>
       );
     }
+  }
+
+  function renderShopCart() {
+    return (
+      <ul className="dropdown-menu">
+        <li>
+          <a className="dropdown-item" href="#">
+            Action
+          </a>
+        </li>
+        <li>
+          <a className="dropdown-item" href="#">
+            Another action
+          </a>
+        </li>
+        <li>
+          <a className="dropdown-item" href="#">
+            Something else here
+          </a>
+        </li>
+      </ul>
+    );
   }
 
   return (
@@ -77,8 +99,14 @@ const Header = (props) => {
           </div>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <div className="mx-1 navbar-brand fontAwesome d-inline iconAwesome">
-                &#xf07a;
+              <div className="dropdown">
+                <div
+                  className="mx-2 navbar-brand fontAwesome d-inline iconAwesome shopCart"
+                  style={{}}
+                >
+                  &#xf07a;
+                </div>
+                {renderShopCart()}
               </div>
             </li>
 

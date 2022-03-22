@@ -31,7 +31,6 @@ class SpecailOffer extends React.Component {
   }
 
   render() {
-    console.log("************special offer render:", this.props);
     if (!this.props.firstVisited) {
       return null;
     }
@@ -47,7 +46,6 @@ class SpecailOffer extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log("mapStateToProps state in special offer", state);
   if (
     state.newStudent.firstVisited &&
     state.newStudent.firstVisited - Date.now() > 0

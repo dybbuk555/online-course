@@ -1,6 +1,6 @@
 import { CHECK_NEWSTUDENT } from "./types";
 
-export const checkNewStudent = () => (dispatch) => {
+export const checkNewStudent = () => {
   var specialOffer = localStorage.getItem("onlineCourseSpecialOffer");
 
   if (!specialOffer) {
@@ -8,5 +8,5 @@ export const checkNewStudent = () => (dispatch) => {
     localStorage.setItem("onlineCourseSpecialOffer", specialOffer);
   }
 
-  dispatch({ type: CHECK_NEWSTUDENT, payload: specialOffer });
+  return { type: CHECK_NEWSTUDENT, payload: specialOffer };
 };

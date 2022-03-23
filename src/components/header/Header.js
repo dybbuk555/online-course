@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import SearhBar from "./SearchBar";
 import { connect } from "react-redux";
-import { fetchShopCart } from "../../actions/shopCartAction";
+import { fetchShopCart, deleteShopCart } from "../../actions/shopCartAction";
 import "./header.css";
 import "font-awesome/css/font-awesome.min.css";
 import courseCatgory from "../../resources/svgs";
@@ -70,7 +70,18 @@ class Header extends React.Component {
               </div>
               <div className="col-6">
                 <h5 className="fw-bold"> {item.title}</h5>
-                <p className="text-end me-5">-{item.instructor}</p>
+                <button
+                  className="btn btn-danger btn-sm me-4 d-inline-block"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    this.props.deleteShopCart(item._id);
+                  }}
+                >
+                  remove
+                </button>
+                <p className="text-end me-3 d-inline-block">
+                  -{item.instructor}
+                </p>
               </div>
             </div>
           </Link>
@@ -139,4 +150,6 @@ const mapStateToProps = (state) => {
     shopCart: state.shopCart,
   };
 };
-export default connect(mapStateToProps, { fetchShopCart })(Header);
+export default connect(mapStateToProps, { fetchShopCart, deleteShopCart })(
+  Header
+);

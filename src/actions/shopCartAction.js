@@ -32,6 +32,29 @@ export const addShopCart = (course) => (dispatch) => {
   dispatch({ type: SUCCESS, payload: `add course:${title} to shop cart` });
 };
 
+export const deleteShopCart = (courseId) => (dipatch) => {
+  console.log("delete item from cart and the courseId is ", courseId);
+  let shopCart = localStorage.getItem("onlineCourseShopCart");
+  try {
+    shopCart = JSON.parse(shopCart);
+  } catch {
+    dipatch({ type: ERROR, payload: "faill to remove course in shop cart" });
+    return;
+  }
+  let title = "";
+  const newShopCarts = shopCart.filter((course) => {
+    if (course._id === courseId) {
+      title = course.title;
+      return false;
+    } else {
+      return true;
+    }
+  });
+  localStorage.setItem("onlineCourseShopCart", JSON.stringify(newShopCarts));
+  dipatch({ type: DELETE_SHOPCART, payload: newShopCarts });
+  dipatch({ type: SUCCESS, payload: `remove course:${title} successfully!` });
+};
+
 export const fetchShopCart = () => {
   let shopCart = localStorage.getItem("onlineCourseShopCart");
   try {

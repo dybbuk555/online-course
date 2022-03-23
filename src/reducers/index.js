@@ -5,6 +5,7 @@ import streamReducer from "./streamReducer";
 import alertReducer from "./alertReducer";
 import courseReducer from "./courseReducer";
 import specialOfferReducer from "./specialOfferReducer";
+import shopCartReducer from "./shopCartReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   alert: alertReducer,
   courses: courseReducer,
   newStudent: specialOfferReducer,
+  shopCart: shopCartReducer,
 });

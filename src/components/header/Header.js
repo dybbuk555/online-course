@@ -2,12 +2,18 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import SearhBar from "./SearchBar";
 import { connect } from "react-redux";
+import { fetchShopCart } from "../../actions/shopCartAction";
 import "./header.css";
 import "font-awesome/css/font-awesome.min.css";
+import courseCatgory from "../../resources/svgs";
 
-const Header = (props) => {
-  function renderUserSpace() {
-    if (props.isSignedIn) {
+class Header extends React.Component {
+  componentDidMount() {
+    this.props.fetchShopCart();
+  }
+
+  renderUserSpace() {
+    if (this.props.isSignedIn) {
       return (
         <Fragment>
           <li className="nav-item my-auto">
@@ -45,81 +51,92 @@ const Header = (props) => {
     }
   }
 
-  function renderShopCart() {
-    return (
-      <ul className="dropdown-menu">
-        <li>
-          <a className="dropdown-item" href="#">
-            Action
-          </a>
+  renderShopItems() {
+    return this.props.shopCart.map((item) => {
+      return (
+        <li key={item._id}>
+          <Link
+            className="dropdown-item px-0 py-2 border-bottom"
+            to={`/course/${item._id}/detail`}
+          >
+            <div className="row d-flex align-items-center">
+              <div className="col-6">
+                <img
+                  src={courseCatgory[item.category.toLowerCase()]}
+                  className="shopCartImg"
+                  alt="cousre image"
+                  width="100%"
+                />
+              </div>
+              <div className="col-6">
+                <h5 className="fw-bold"> {item.title}</h5>
+                <p className="text-end me-5">-{item.instructor}</p>
+              </div>
+            </div>
+          </Link>
         </li>
-        <li>
-          <a className="dropdown-item" href="#">
-            Another action
-          </a>
-        </li>
-        <li>
-          <a className="dropdown-item" href="#">
-            Something else here
-          </a>
-        </li>
-      </ul>
-    );
+      );
+    });
   }
+  renderShopCart() {
+    if (!this.props.shopCart) return;
+    return <ul className="dropdown-menu">{this.renderShopItems()}</ul>;
+  }
+  render() {
+    return (
+      <div className="navbar navbar-expand-lg navbar-light light bg-light">
+        <div className="container-fluid">
+          <Link to="/" className="navbar-brand">
+            <h1>
+              <i className="fontAwesome">&#xf02d;</i> Online Course
+            </h1>
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-  return (
-    <div className="navbar navbar-expand-lg navbar-light light bg-light">
-      <div className="container-fluid">
-        <Link to="/" className="navbar-brand">
-          <h1>
-            <i className="fontAwesome">&#xf02d;</i> Online Course
-          </h1>
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarNav">
-          {/* <ul className="navbar-nav">
+          <div className="collapse navbar-collapse" id="navbarNav">
+            {/* <ul className="navbar-nav">
             <li className="nav-item">
               <CategoriesButton />
             </li>
           </ul> */}
 
-          <div className="w-100">
-            <SearhBar />
-          </div>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <div className="dropdown">
-                <div
-                  className="mx-2 navbar-brand fontAwesome d-inline iconAwesome shopCart"
-                  style={{}}
-                >
-                  &#xf07a;
-                </div>
-                {renderShopCart()}
-              </div>
-            </li>
+            <div className="w-100">
+              <SearhBar />
+            </div>
 
-            {renderUserSpace()}
-          </ul>
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <div className="dropdown">
+                  <div className="mx-2 navbar-brand fontAwesome d-inline iconAwesome shopCart">
+                    &#xf07a;
+                  </div>
+                  {this.renderShopCart()}
+                </div>
+              </li>
+
+              {this.renderUserSpace()}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
-  //console.log("sign in state", state);
-  return { isSignedIn: state.auth.isSignedIn };
+  return {
+    isSignedIn: state.auth.isSignedIn,
+    shopCart: state.shopCart,
+  };
 };
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { fetchShopCart })(Header);

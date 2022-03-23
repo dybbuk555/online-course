@@ -17,8 +17,18 @@ li {
 .dropdown:hover .dropdown-menu {
   display: block;
   margin-top: 0;
+  right: 0px;
 }
 
 .shopCart {
   font-size: 2.5em;
+}
+
+.dropdown-menu {
+  word-wrap: break-word;
+  width: 400px !important;
+}
+
+.dropdown-item {
+  white-space: pre-wrap;
 }

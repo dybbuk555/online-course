@@ -6,7 +6,7 @@ import courseCatgory from "../../resources/svgs";
 import ReviewForm from "./ReviewForm";
 import { createReview } from "../../actions/reviewAction";
 import { addShopCart } from "../../actions/shopCartAction";
-
+import history from "../../helpers/history";
 class CourseDetail extends React.Component {
   componentDidMount() {
     console.log("Ffffffffffffftech course");
@@ -16,6 +16,12 @@ class CourseDetail extends React.Component {
     formValues.courseId = this.props.course._id;
     this.props.createReview(formValues);
   };
+
+  componentDidUpdate() {
+    if (history.location.pathname.split("/")[2] !== this.props.course._id) {
+      this.props.fetchCourse(this.props.match.params.courseId);
+    }
+  }
 
   detailHeader(course) {
     if (!Array.isArray(course)) {

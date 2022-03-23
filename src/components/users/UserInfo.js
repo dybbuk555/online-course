@@ -7,7 +7,7 @@ class UserInfo extends React.Component {
     if (this.props.auth && this.props.auth.isSignedIn) {
       this.props.fetchCourses({
         userId: this.props.auth.user.userId,
-        filtertype: "student",
+        filterType: "student",
       });
     }
   }

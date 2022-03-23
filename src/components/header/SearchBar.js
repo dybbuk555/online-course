@@ -29,7 +29,6 @@ class SearchBar extends React.Component {
         type="text"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            console.log(e.target.value);
             this.clickHandler(e.target.value);
             e.target.value = "";
           }

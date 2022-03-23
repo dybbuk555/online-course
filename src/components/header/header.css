@@ -14,7 +14,7 @@ li {
   white-space: nowrap;
 }
 
-.dropdown:hover .dropdown-menu {
+li .dropdown:hover .dropdown-menu {
   display: block;
   margin-top: 0;
   right: 0px;
@@ -24,11 +24,19 @@ li {
   font-size: 2.5em;
 }
 
-.dropdown-menu {
+li .dropdown-menu {
   word-wrap: break-word;
   width: 400px !important;
 }
 
-.dropdown-item {
+li .dropdown-item {
   white-space: pre-wrap;
+}
+
+.shopcartBadge {
+  position: relative;
+  padding-top: 10px;
+  top: -25px;
+  right: 10px;
+  display: inline-block;
 }

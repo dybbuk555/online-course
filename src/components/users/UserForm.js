@@ -15,11 +15,9 @@ class UserForm extends React.Component {
   }
 
   renderInput = ({ input, meta, placeholder, type }) => {
-    //console.log("input", input, meta);
     const className = `field ${
       meta.error && meta.touched ? "" : "" //"is-invalid" : "is-valid"
     }`;
-    //console.log("renderInput", input, meta);
     // input from filed built-in
     // label from our defined
     return (
@@ -40,12 +38,10 @@ class UserForm extends React.Component {
   };
 
   onSubmit = (formValues) => {
-    console.log("onSubmit in User form", formValues);
     this.props.onSubmit(formValues);
   };
 
   render() {
-    //console.log("render in form", this.props);
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <div className="mb-3">

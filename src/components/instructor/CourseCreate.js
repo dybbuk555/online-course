@@ -9,7 +9,6 @@ class CourseCreate extends React.Component {
   };
 
   render() {
-    console.log("render", this.props);
     return (
       <div className="container mt-5 justify-content-center">
         <h1> Create new course</h1>

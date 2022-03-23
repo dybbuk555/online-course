@@ -16,7 +16,7 @@ class CourseForm extends React.Component {
 
   renderInput = (args) => {
     const { input, meta, placeholder, type } = args;
-    //console.log("input", input, meta);
+
     const className = `${
       meta.error && meta.touched ? "" : "" //"is-invalid" : "is-valid"
     }`;
@@ -38,13 +38,10 @@ class CourseForm extends React.Component {
   };
 
   onSubmit = (formValues) => {
-    //console.log("onSubmit in User form", formValues);
     this.props.onSubmit(formValues);
   };
 
   render() {
-    console.log("render in form", this.props.initialValues);
-    console.log("HHHHistroy:", history);
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <div className="row g-3 align-items-center justify-content-center m-2">

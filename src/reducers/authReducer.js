@@ -7,7 +7,7 @@ try {
   const tokenPared = JSON.parse(localStorage.getItem("user"));
   user = jwt(tokenPared.jwtToken);
   isExpried = Date.now() / 1000 - user.exp > 0;
-  console.log("is expired:", isExpried);
+  console.log("jwt token is expired:", isExpried);
 } catch (errors) {}
 const INITIAL_STATE =
   user && !isExpried

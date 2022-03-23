@@ -9,14 +9,14 @@ export default (state = [], action) => {
     case FETCH_SHOPCART:
       return action.payload;
     case ADD_SHOPCART:
-      console.log("add shopcart");
+      if (state === null) {
+        state = [];
+      }
+      console.log(state);
       return [...state, action.payload];
     case DELETE_SHOPCART:
+      // implement filter in action
       return action.payload;
-    // return state.filter((course) => {
-    //   console.log(course._id, action.payload);
-    //   return course._id !== action.payload;
-    // });
 
     default:
       return state;

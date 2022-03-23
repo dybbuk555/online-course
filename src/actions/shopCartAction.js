@@ -14,7 +14,6 @@ export const addShopCart = (course) => (dispatch) => {
   if (!Array.isArray(shopCart)) {
     shopCart = [];
   }
-  console.log(shopCart);
   const alreadyAdded = shopCart.some((item) => {
     return item._id === course._id;
   });
@@ -33,7 +32,6 @@ export const addShopCart = (course) => (dispatch) => {
 };
 
 export const deleteShopCart = (courseId) => (dipatch) => {
-  console.log("delete item from cart and the courseId is ", courseId);
   let shopCart = localStorage.getItem("onlineCourseShopCart");
   try {
     shopCart = JSON.parse(shopCart);
@@ -62,6 +60,5 @@ export const fetchShopCart = () => {
   } catch {
     shopCart = [];
   }
-  console.log("here is the list of shopcart:", shopCart);
   return { type: FETCH_SHOPCART, payload: shopCart };
 };

@@ -9,7 +9,6 @@ import { addShopCart } from "../../actions/shopCartAction";
 import history from "../../helpers/history";
 class CourseDetail extends React.Component {
   componentDidMount() {
-    console.log("Ffffffffffffftech course");
     this.props.fetchCourse(this.props.match.params.courseId);
   }
   onSubmit = (formValues) => {
@@ -235,13 +234,12 @@ class CourseDetail extends React.Component {
   }
 
   render() {
-    console.log("CCCCCCCCCCCCourse Detail RRRRRRRerender@@@@@@@@@@@@@@");
     if (Array.isArray(this.props.course)) {
       return <Fragment></Fragment>;
     }
 
     const course = this.props.course;
-    console.log("render", course);
+
     if (!course) {
       return null;
     }

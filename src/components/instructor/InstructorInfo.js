@@ -57,7 +57,7 @@ class InstructorInfo extends React.Component {
       const { user } = this.props.auth;
       const { courses } = this.props;
       const statistics = this.statisticFunction(courses);
-      console.log(courses);
+
       return (
         <Fragment>
           <h1>INFO:</h1>

@@ -4,14 +4,10 @@ import { reduxForm, reset } from "redux-form";
 
 class ReviewForm extends React.Component {
   onSubmit = (formValues) => {
-    //console.log("onSubmit in User form", formValues);
-    console.log("ssssssssssubmit", formValues);
     this.props.onSubmit(formValues);
   };
 
   render(args) {
-    console.log("let's render", this.props, args);
-
     return (
       <div className="leaveComment">
         <div className="card m-0">
@@ -90,7 +86,6 @@ class ReviewForm extends React.Component {
                     type="button"
                     className="btn btn-danger"
                     onClick={() => {
-                      console.log("let's reset");
                       this.props.reset();
                     }}
                   >
@@ -111,7 +106,6 @@ class ReviewForm extends React.Component {
 
 const validate = (formValues) => {
   const errors = {};
-  console.log("validate", formValues);
   if (!formValues.content) {
     errors.content = "You must write some comment";
   }

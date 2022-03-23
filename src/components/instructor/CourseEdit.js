@@ -9,7 +9,6 @@ class CourseEdit extends React.Component {
     this.props.fetchCourse(this.props.match.params.courseId);
   }
   onSubmit = (formValues) => {
-    console.log("submit edit:", formValues, this.props);
     this.props.editCourse(formValues, this.props.course._id);
   };
 

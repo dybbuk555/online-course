@@ -115,12 +115,6 @@ class Header extends React.Component {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarNav">
-            {/* <ul className="navbar-nav">
-            <li className="nav-item">
-              <CategoriesButton />
-            </li>
-          </ul> */}
-
             <div className="w-100">
               <SearhBar />
             </div>
@@ -131,6 +125,9 @@ class Header extends React.Component {
                   <div className="mx-2 navbar-brand fontAwesome d-inline iconAwesome shopCart">
                     &#xf07a;
                   </div>
+                  <span className="badge bg-danger shopcartBadge">
+                    {this.props.shopCart && this.props.shopCart.length}
+                  </span>
                   {this.renderShopCart()}
                 </div>
               </li>

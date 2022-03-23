@@ -3,8 +3,7 @@ export function authHeader() {
   try {
     const user = JSON.parse(localStorage.getItem("user"));
     const jwtDecoded = jwt(user.jwtToken);
-    console.log(jwtDecoded);
-    console.log("token", user);
+
     if (user && user.jwtToken) {
       return { Authorization: "Bearer " + user.jwtToken };
     } else {

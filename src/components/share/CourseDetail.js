@@ -41,7 +41,7 @@ class CourseDetail extends React.Component {
   }
 
   renderPromation(course) {
-    if (this.props.newStudent.timeDiff && this.props.newStudent.timeDiff > 0) {
+    if (this.props.newStudent && this.props.newStudent - Date.now() > 0) {
       return (
         <Fragment>
           <span className="fs-3">{course.price}$</span>

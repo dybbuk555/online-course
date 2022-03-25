@@ -1,4 +1,9 @@
-import { CREATE_REVIEW, FETCH_REVIEW, ERROR, SUCCESS } from "./types";
+import {
+  //CREATE_REVIEW,
+  //FETCH_REVIEW,
+  ERROR,
+  SUCCESS,
+} from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
 import history from "./../helpers/history";

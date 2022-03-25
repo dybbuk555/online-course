@@ -64,8 +64,8 @@ class Header extends React.Component {
                 <img
                   src={courseCatgory[item.category.toLowerCase()]}
                   className="shopCartImg"
-                  alt="cousre image"
                   width="100%"
+                  alt="shop cart"
                 />
               </div>
               <div className="col-6">

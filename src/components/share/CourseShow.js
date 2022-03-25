@@ -84,7 +84,7 @@ class CourseShow extends React.Component {
               <img
                 src={courseCatgory[course.category.toLowerCase()]}
                 className="card-img-top"
-                alt="cousre image"
+                alt="course"
               />
               <div className="card-body">
                 <h4 className="card-title">{course.title}</h4>

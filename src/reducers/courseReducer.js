@@ -7,7 +7,7 @@ import {
   UNSUBSCRIBE_COURSE,
 } from "../actions/types";
 
-export default (state = [], action) => {
+const courseReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_COURSE:
       return action.payload;
@@ -37,3 +37,5 @@ export default (state = [], action) => {
       return state;
   }
 };
+
+export default courseReducer;

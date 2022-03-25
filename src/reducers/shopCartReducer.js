@@ -4,7 +4,7 @@ import {
   DELETE_SHOPCART,
 } from "../actions/types";
 
-export default (state = [], action) => {
+const shopCartReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_SHOPCART:
       return action.payload;
@@ -22,3 +22,4 @@ export default (state = [], action) => {
       return state;
   }
 };
+export default shopCartReducer;

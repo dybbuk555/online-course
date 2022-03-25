@@ -1,6 +1,6 @@
 import { CHECK_NEWSTUDENT } from "../actions/types";
 
-export default (state = "", action) => {
+const specialOfferReducer = (state = "", action) => {
   switch (action.type) {
     case CHECK_NEWSTUDENT:
       // a redundant variable: remainTime is to keep the componentDidMount lifeCycle going
@@ -12,3 +12,5 @@ export default (state = "", action) => {
       return state;
   }
 };
+
+export default specialOfferReducer;

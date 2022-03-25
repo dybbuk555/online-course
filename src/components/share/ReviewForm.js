@@ -1,6 +1,6 @@
 import React from "react";
 import { Field } from "redux-form";
-import { reduxForm, reset } from "redux-form";
+import { reduxForm } from "redux-form";
 
 class ReviewForm extends React.Component {
   onSubmit = (formValues) => {

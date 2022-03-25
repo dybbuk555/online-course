@@ -126,14 +126,14 @@ class CourseForm extends React.Component {
           </div>
         </div>
         <div className="d-flex justify-content-evenly">
-          <a
+          <button
             className="btn w-25 mt-2 btn-outline-danger"
             onClick={() => {
               history.goBack();
             }}
           >
             Back
-          </a>
+          </button>
           <button
             className={`btn w-25 mt-2 ${
               this.props.name === "Create"

@@ -89,7 +89,7 @@ class CourseDetail extends React.Component {
         <img
           src={courseCatgory[course.category.toLowerCase()]}
           className="card-img-top"
-          alt="cousre image"
+          alt="course"
         />
         <p className="mt-3">{this.renderPromation(course)}</p>
         <button
@@ -169,9 +169,9 @@ class CourseDetail extends React.Component {
     function renderStars(n) {
       return Array.apply(null, Array(5)).map((empty, ind) => {
         return ind < n ? (
-          <h5 className="starMark" key={ind}></h5>
+          <div className="starMark" key={ind}></div>
         ) : (
-          <h5 key={ind}>☆</h5>
+          <div key={ind}>☆</div>
         );
       });
     }

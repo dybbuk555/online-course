@@ -17,7 +17,7 @@ const INITIAL_STATE =
       }
     : { isSignedIn: false, user: null };
 
-export default (state = INITIAL_STATE, action) => {
+const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SIGN_IN:
       // action.payload => decoded jwt data
@@ -28,3 +28,5 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+export default authReducer;

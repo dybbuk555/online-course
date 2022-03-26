@@ -4,11 +4,12 @@
   top: 20vh;
   right: 10vh;
   width: 40vh;
-  height: 75vh;
+  padding-bottom: 2em;
 }
 
 .detailHeaderBg {
-  height: 35vh;
+  height: auto;
+  padding-bottom: 10px;
 }
 
 .detailHeader {
@@ -85,7 +86,6 @@ ul {
   .sideBar {
     width: 35vh;
     right: 5vh;
-    height: 75vh;
   }
 }
 
@@ -104,7 +104,6 @@ ul {
     width: 55vw;
     margin: auto;
     margin-bottom: 25px;
-    height: 90vh;
   }
 
   .detailBody .card {
@@ -120,9 +119,18 @@ ul {
 @media screen and (max-width: 600px) {
   .sideBar {
     width: 80vw;
+  }
+  .detailHeaderBg {
+    height: auto;
+  }
+}
+
+/* @media screen and (max-width: 400px) {
+  .sideBar {
+    width: 80vw;
     height: 70vh;
   }
   .detailHeaderBg {
-    height: 30vh;
+    height: 40vh;
   }
-}
+} */

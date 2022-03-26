@@ -38,7 +38,7 @@ class SpecailOffer extends React.Component {
     const time = this.timeParser(timeDiff);
 
     return (
-      <div className="specialOffer">
+      <div className="specialOffer sticky stickySpecial">
         <h3>A special Offer for new students</h3>
         <h3>Ends in {time}</h3>
       </div>

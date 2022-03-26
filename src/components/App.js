@@ -11,7 +11,6 @@ import PrivateRoute from "./PrivateRoute";
 import { messageClear } from "../actions";
 import { connect } from "react-redux";
 import MainPage from "./main/MainPage";
-import SpecialOffer from "./share/SpecialOffer";
 import ErrorBoundary from "./share/ErrorBoundary";
 import GoToTop from "./share/goToTop";
 
@@ -36,7 +35,6 @@ class App extends React.Component {
           <Router history={history}>
             <div>
               <GoToTop />
-              <SpecialOffer />
               <Header />
               <Switch>
                 <Route path="/register">

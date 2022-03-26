@@ -40,3 +40,10 @@ li .dropdown-item {
   right: 10px;
   display: inline-block;
 }
+
+.sticky {
+  top: 0px;
+  position: sticky;
+  width: 100%;
+  z-index: 5;
+}

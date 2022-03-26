@@ -6,6 +6,7 @@ import { fetchShopCart, deleteShopCart } from "../../actions/shopCartAction";
 import "./header.css";
 import "font-awesome/css/font-awesome.min.css";
 import courseCatgory from "../../resources/svgs";
+import SpecialOffer from "./../share/SpecialOffer";
 
 class Header extends React.Component {
   componentDidMount() {
@@ -95,45 +96,48 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <div className="navbar navbar-expand-lg navbar-light light bg-light">
-        <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
-            <h1>
-              <i className="fontAwesome">&#xf02d;</i> Online Course
-            </h1>
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+      <div className="sticky shadow bg-body rounded">
+        <SpecialOffer />
+        <div className="navbar navbar-expand-lg navbar-light light bg-light">
+          <div className="container-fluid">
+            <Link to="/" className="navbar-brand">
+              <h1>
+                <i className="fontAwesome">&#xf02d;</i> Online Course
+              </h1>
+            </Link>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
 
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <div className="w-100">
-              <SearhBar />
-            </div>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <div className="w-100">
+                <SearhBar />
+              </div>
 
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <div className="dropdown">
-                  <div className="mx-2 navbar-brand fontAwesome d-inline iconAwesome shopCart">
-                    &#xf07a;
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <div className="dropdown">
+                    <div className="mx-2 navbar-brand fontAwesome d-inline iconAwesome shopCart">
+                      &#xf07a;
+                    </div>
+                    <span className="badge bg-danger shopcartBadge">
+                      {this.props.shopCart && this.props.shopCart.length}
+                    </span>
+                    {this.renderShopCart()}
                   </div>
-                  <span className="badge bg-danger shopcartBadge">
-                    {this.props.shopCart && this.props.shopCart.length}
-                  </span>
-                  {this.renderShopCart()}
-                </div>
-              </li>
+                </li>
 
-              {this.renderUserSpace()}
-            </ul>
+                {this.renderUserSpace()}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

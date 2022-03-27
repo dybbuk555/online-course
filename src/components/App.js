@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import MainPage from "./main/MainPage";
 import ErrorBoundary from "./share/ErrorBoundary";
 import GoToTop from "./share/goToTop";
+import TopButton from "./share/TopButton";
 
 class App extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class App extends React.Component {
             <div>
               <GoToTop />
               <Header />
+              <TopButton />
               <Switch>
                 <Route path="/register">
                   <UserRegister />

@@ -41,7 +41,7 @@ li .dropdown-item {
   display: inline-block;
 }
 
-.sticky {
+.stickyHeader {
   top: 0px;
   position: sticky;
   width: 100%;

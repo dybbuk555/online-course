@@ -96,7 +96,7 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <div className="sticky shadow bg-body rounded">
+      <div className="stickyHeader shadow bg-body rounded">
         <SpecialOffer />
         <div className="navbar navbar-expand-lg navbar-light light bg-light">
           <div className="container-fluid">

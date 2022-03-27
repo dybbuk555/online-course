@@ -26,7 +26,7 @@ li .dropdown:hover .dropdown-menu {
 
 li .dropdown-menu {
   word-wrap: break-word;
-  width: 400px !important;
+  width: 400px;
 }
 
 li .dropdown-item {
@@ -46,4 +46,11 @@ li .dropdown-item {
   position: sticky;
   width: 100%;
   z-index: 5;
+}
+
+@media screen and (max-width: 450px) {
+  li .dropdown-menu {
+    width: 95%;
+    padding: 0;
+  }
 }

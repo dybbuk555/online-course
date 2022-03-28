@@ -78,6 +78,13 @@ class CourseShow extends React.Component {
 
     if (courses && courses.length > 0) {
       const courseCards = courses.map((course) => {
+        let averageRating =
+          course.reviews.length > 0
+            ? course.reviews.reduce((prev, curr) => {
+                return prev + curr.rating;
+              }, 0) / course.reviews.length
+            : NaN;
+
         return (
           <div className="col" key={course._id}>
             <div className="card h-100">
@@ -96,8 +103,11 @@ class CourseShow extends React.Component {
                 <li className="list-group-item">
                   Instructor: {course.instructor.username}
                 </li>
-                <li className="list-group-item">
-                  students: {course.students.length}
+                <li className="list-group-item d-flex">
+                  <div className="col-5">
+                    Students: {course.students.length}
+                  </div>
+                  <div className="col-5"> Rating: {averageRating}</div>
                 </li>
               </ul>
               <div className="card-body">

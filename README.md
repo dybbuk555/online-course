@@ -11,4 +11,8 @@ deploy on netlify: [https://velvety-kulfi-650427.netlify.app](https://velvety-k
 3. Create course, subscribe course, make comment by redux action + mongoose course, user, review schema
 
 
+Demo:  
+![image](https://github.com/DeltaLF/online-course/blob/master/onlineCourseDemo.gif)
+
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a6e6a224-d5b2-4830-ab9c-10a08c39f043/deploy-status)](https://app.netlify.com/sites/velvety-kulfi-650427/deploys)

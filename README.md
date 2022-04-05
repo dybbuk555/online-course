@@ -4,8 +4,9 @@
 
 **back-end: node, express, mongodb atlas**
 
-deploy on netlify: [https://velvety-kulfi-650427.netlify.app](https://velvety-kulfi-650427.netlify.app/)features:
+deploy on netlify: [https://velvety-kulfi-650427.netlify.app](https://velvety-kulfi-650427.netlify.app/)  
 
+features:
 1. authentication by jwt token
 2. first visited promotion, shop cart implemented by localStorage
 3. Create course, subscribe course, make comment by redux action + mongoose course, user, review schema

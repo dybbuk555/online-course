@@ -6,6 +6,8 @@
 
 deploy on netlify: [https://velvety-kulfi-650427.netlify.app](https://velvety-kulfi-650427.netlify.app/)  
 
+back-end code is [here](https://github.com/DeltaLF/online-course) on GitHub
+
 features:
 1. authentication by jwt token
 2. first visited promotion, shop cart implemented by localStorage

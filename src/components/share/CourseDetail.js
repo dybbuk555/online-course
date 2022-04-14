@@ -10,17 +10,35 @@ import history from "../../helpers/history";
 class CourseDetail extends React.Component {
   componentDidMount() {
     this.props.fetchCourse(this.props.match.params.courseId);
+    this.unlisten = history.listen(({ pathname }) => {
+      const urlPath = pathname.split("/");
+
+      if (urlPath[urlPath.length - 1] === "detail") {
+        // only want to fetchCourse when chaning location in detail route
+        this.props.fetchCourse(history.location.pathname.split("/")[2]);
+      }
+    });
+  }
+  componentWillUnmount() {
+    // clean up listener
+    this.unlisten();
   }
   onSubmit = (formValues) => {
     formValues.courseId = this.props.course._id;
     this.props.createReview(formValues);
   };
 
-  componentDidUpdate() {
-    if (history.location.pathname.split("/")[2] !== this.props.course._id) {
-      this.props.fetchCourse(this.props.match.params.courseId);
-    }
-  }
+  // cuases infinite loop when data fials to fetch
+  // componentDidUpdate() {
+  //   if (history.location.pathname.split("/")[2] !== this.props.course._id) {
+  //     console.log(
+  //       "not identical",
+  //       history.location.pathname.split("/")[2],
+  //       this.props.course._id
+  //     );
+  //     //this.props.fetchCourse(this.props.match.params.courseId);
+  //   }
+  // }
 
   detailHeader(course) {
     if (!Array.isArray(course)) {
@@ -276,6 +294,7 @@ class CourseDetail extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  //console.log(state);
   return {
     course: state.courses.length ? state.courses[0] : false,
     newStudent: state.newStudent.firstVisited,

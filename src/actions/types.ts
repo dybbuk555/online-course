@@ -1,3 +1,12 @@
+// export enum USER_TYPES {
+//     SIGN_IN = "SIGN_IN",
+//     SIGN_OUT = "SIGN_OUT",
+//     SUCCESS = "SUCCESS",
+//     ERROR = "ERROR",
+//     CLEAR = "CLEAR"
+// }
+
+
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
 export const SUCCESS = "SUCCESS";

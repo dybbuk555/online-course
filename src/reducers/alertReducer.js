@@ -1,12 +1,12 @@
-import { SUCCESS, ERROR, CLEAR } from "../actions/types";
+import { MESSAGE_ACTIONS_TYPES } from "../actions/types";
 
 const alertReducer = (state = {}, action) => {
   switch (action.type) {
-    case SUCCESS:
+    case MESSAGE_ACTIONS_TYPES.SUCCESS:
       return { type: "alert-success", message: action.payload };
-    case ERROR:
+    case MESSAGE_ACTIONS_TYPES.ERROR:
       return { type: "alert-danger", message: action.payload };
-    case CLEAR:
+    case MESSAGE_ACTIONS_TYPES.CLEAR:
       return {};
     default:
       return state;

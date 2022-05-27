@@ -1,14 +1,17 @@
-// export enum USER_TYPES {
-//     SIGN_IN = "SIGN_IN",
-//     SIGN_OUT = "SIGN_OUT",
-//     SUCCESS = "SUCCESS",
-//     ERROR = "ERROR",
-//     CLEAR = "CLEAR"
-// }
+export enum USER_ACTIONS_TYPES {
+    SIGN_IN = "SIGN_IN",
+    SIGN_OUT = "SIGN_OUT",
 
+}
 
-export const SIGN_IN = "SIGN_IN";
-export const SIGN_OUT = "SIGN_OUT";
+export enum MESSAGE_ACTIONS_TYPES {
+    SUCCESS = "SUCCESS",
+    ERROR = "ERROR",
+    CLEAR = "CLEAR"
+}
+
+// export const SIGN_IN = "SIGN_IN";
+//export const SIGN_OUT = "SIGN_OUT";
 export const SUCCESS = "SUCCESS";
 export const ERROR = "ERROR";
 export const CLEAR = "CLEAR";

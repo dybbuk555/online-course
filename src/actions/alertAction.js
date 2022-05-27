@@ -1,21 +1,21 @@
-import { SUCCESS, ERROR, CLEAR } from "./types";
+import { MESSAGE_ACTIONS_TYPES } from "./types";
 
 export const messageSuccess = (message) => {
   return {
-    type: SUCCESS,
+    type: MESSAGE_ACTIONS_TYPES.SUCCESS,
     payload: message,
   };
 };
 
 export const messageError = (message) => {
   return {
-    type: ERROR,
+    type: MESSAGE_ACTIONS_TYPES.ERROR,
     payload: message,
   };
 };
 
 export const messageClear = () => {
   return {
-    type: CLEAR,
+    type: MESSAGE_ACTIONS_TYPES.CLEAR,
   };
 };

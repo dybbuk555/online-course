@@ -1,10 +1,5 @@
-import {
-  ADD_SHOPCART,
-  DELETE_SHOPCART,
-  FETCH_SHOPCART,
-  ERROR,
-  SUCCESS,
-} from "./types";
+import { ADD_SHOPCART, DELETE_SHOPCART, FETCH_SHOPCART } from "./types";
+import { MESSAGE_ACTIONS_TYPES } from "./types";
 
 export const addShopCart = (course) => (dispatch) => {
   let shopCart = localStorage.getItem("onlineCourseShopCart");
@@ -19,7 +14,10 @@ export const addShopCart = (course) => (dispatch) => {
   });
 
   if (alreadyAdded) {
-    dispatch({ type: ERROR, payload: "course already existis in shop cart" });
+    dispatch({
+      type: MESSAGE_ACTIONS_TYPES.ERROR,
+      payload: "course already existis in shop cart",
+    });
     return;
   }
   const { _id, price, title, category } = course;
@@ -28,7 +26,10 @@ export const addShopCart = (course) => (dispatch) => {
   shopCart.push(addCourse);
   localStorage.setItem("onlineCourseShopCart", JSON.stringify(shopCart));
   dispatch({ type: ADD_SHOPCART, payload: addCourse });
-  dispatch({ type: SUCCESS, payload: `add course:${title} to shop cart` });
+  dispatch({
+    type: MESSAGE_ACTIONS_TYPES.SUCCESS,
+    payload: `add course:${title} to shop cart`,
+  });
 };
 
 export const deleteShopCart = (courseId) => (dipatch) => {
@@ -36,7 +37,10 @@ export const deleteShopCart = (courseId) => (dipatch) => {
   try {
     shopCart = JSON.parse(shopCart);
   } catch {
-    dipatch({ type: ERROR, payload: "faill to remove course in shop cart" });
+    dipatch({
+      type: MESSAGE_ACTIONS_TYPES.ERROR,
+      payload: "faill to remove course in shop cart",
+    });
     return;
   }
   let title = "";
@@ -50,7 +54,10 @@ export const deleteShopCart = (courseId) => (dipatch) => {
   });
   localStorage.setItem("onlineCourseShopCart", JSON.stringify(newShopCarts));
   dipatch({ type: DELETE_SHOPCART, payload: newShopCarts });
-  dipatch({ type: SUCCESS, payload: `remove course:${title} successfully!` });
+  dipatch({
+    type: MESSAGE_ACTIONS_TYPES.SUCCESS,
+    payload: `remove course:${title} successfully!`,
+  });
 };
 
 export const fetchShopCart = () => {

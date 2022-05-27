@@ -1,13 +1,12 @@
 import {
   //CREATE_COURSE,
   //EDIT_COURSE,
-  ERROR,
-  SUCCESS,
   FETCH_COURSES,
   FETCH_COURSE,
   SUBSCRIBE_COURSE,
   UNSUBSCRIBE_COURSE,
 } from "./types";
+import { MESSAGE_ACTIONS_TYPES } from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
 import { orderBy } from "lodash";
@@ -20,18 +19,21 @@ export const unSubscribeCourse = (course) => async (dispatch) => {
       dispatch({ type: UNSUBSCRIBE_COURSE, payload: response.data.course });
       // history.go(0);
       dispatch({
-        type: SUCCESS,
+        type: MESSAGE_ACTIONS_TYPES.SUCCESS,
         payload: `Sucessfully unsubscribe course: ${course.title}!`,
       });
     })
     .catch((error) => {
       if (!error.response) {
         dispatch({
-          type: ERROR,
+          type: MESSAGE_ACTIONS_TYPES.ERROR,
           payload: "fail to unsubscribe course, no response",
         });
       } else {
-        dispatch({ type: ERROR, payload: error.response.data.message });
+        dispatch({
+          type: MESSAGE_ACTIONS_TYPES.ERROR,
+          payload: error.response.data.message,
+        });
       }
     });
 };
@@ -41,7 +43,7 @@ export const subscribeCourse = (course) => async (dispatch, getState) => {
   if (!state.auth.isSignedIn) {
     history.push("/login");
     dispatch({
-      type: ERROR,
+      type: MESSAGE_ACTIONS_TYPES.ERROR,
       payload: "You need to log in to subscribe a course",
     });
   } else {
@@ -51,18 +53,21 @@ export const subscribeCourse = (course) => async (dispatch, getState) => {
         dispatch({ type: SUBSCRIBE_COURSE, payload: response.data.course });
         // history.go(0);
         dispatch({
-          type: SUCCESS,
+          type: MESSAGE_ACTIONS_TYPES.SUCCESS,
           payload: `Sucessfully subscribe course: ${course.title}!`,
         });
       })
       .catch((error) => {
         if (!error.response) {
           dispatch({
-            type: ERROR,
+            type: MESSAGE_ACTIONS_TYPES.ERROR,
             payload: "fail to subscribe course, no response",
           });
         } else {
-          dispatch({ type: ERROR, payload: error.response.data.message });
+          dispatch({
+            type: MESSAGE_ACTIONS_TYPES.ERROR,
+            payload: error.response.data.message,
+          });
         }
       });
   }
@@ -78,11 +83,14 @@ export const fetchCourse = (courseId) => async (dispatch) => {
     .catch((error) => {
       if (!error.response) {
         dispatch({
-          type: ERROR,
+          type: MESSAGE_ACTIONS_TYPES.ERROR,
           payload: "fail to fetch course, no response",
         });
       } else {
-        dispatch({ type: ERROR, payload: error.response.data.message });
+        dispatch({
+          type: MESSAGE_ACTIONS_TYPES.ERROR,
+          payload: error.response.data.message,
+        });
       }
     });
 };
@@ -104,11 +112,14 @@ export const fetchCourses = (parameters) => async (dispatch, getState) => {
     .catch((error) => {
       if (!error.response) {
         dispatch({
-          type: ERROR,
+          type: MESSAGE_ACTIONS_TYPES.ERROR,
           payload: "fail to fetch courses, no response",
         });
       } else {
-        dispatch({ type: ERROR, payload: error.response.data.message });
+        dispatch({
+          type: MESSAGE_ACTIONS_TYPES.ERROR,
+          payload: error.response.data.message,
+        });
       }
     });
 };
@@ -142,16 +153,22 @@ export const createCourse = (formValues) => async (dispatch, getState) => {
     .post("/course", { formValues }, { headers: authHeader() })
     .then((response) => {
       history.push("/instructor/course"); // avoid clearing alert message
-      dispatch({ type: SUCCESS, payload: "Course created successfully" });
+      dispatch({
+        type: MESSAGE_ACTIONS_TYPES.SUCCESS,
+        payload: "Course created successfully",
+      });
     })
     .catch((error) => {
       if (!error.response) {
         dispatch({
-          type: ERROR,
+          type: MESSAGE_ACTIONS_TYPES.ERROR,
           payload: "fail to create course, no response",
         });
       } else {
-        dispatch({ type: ERROR, payload: error.response.data.message });
+        dispatch({
+          type: MESSAGE_ACTIONS_TYPES.ERROR,
+          payload: error.response.data.message,
+        });
       }
     });
 };
@@ -166,18 +183,24 @@ export const editCourse =
       )
       .then((response) => {
         history.push("/instructor/course"); // avoid clearing alert message
-        dispatch({ type: SUCCESS, payload: "Course updated successfully" });
+        dispatch({
+          type: MESSAGE_ACTIONS_TYPES.SUCCESS,
+          payload: "Course updated successfully",
+        });
       })
       .catch((error) => {
         if (!error.response) {
           history.push("/instructor/course");
           dispatch({
-            type: ERROR,
+            type: MESSAGE_ACTIONS_TYPES.ERROR,
             payload: "fail to update course, no response",
           });
         } else {
           history.push("/instructor/course");
-          dispatch({ type: ERROR, payload: error.response.data.message });
+          dispatch({
+            type: MESSAGE_ACTIONS_TYPES.ERROR,
+            payload: error.response.data.message,
+          });
         }
       });
   };

@@ -1,6 +1,7 @@
 import server from "../apis/server";
 import jwt from "jwt-decode";
-import { SIGN_IN, SIGN_OUT, SUCCESS, ERROR } from "./types";
+import { MESSAGE_ACTIONS_TYPES } from "./types";
+import { USER_ACTIONS_TYPES } from "./types";
 import history from "./../helpers/history";
 
 export const userSignIn =
@@ -12,12 +13,18 @@ export const userSignIn =
         const jwtDecoded = jwt(response.data.jwtToken);
 
         localStorage.setItem("user", JSON.stringify(response.data)); // local: encoeded
-        dispatch({ type: SIGN_IN, payload: jwtDecoded }); // reducer state: decoded
+        dispatch({ type: USER_ACTIONS_TYPES.SIGN_IN, payload: jwtDecoded }); // reducer state: decoded
         history.push("/"); // avoid clearing alert message
-        dispatch({ type: SUCCESS, payload: "successfully log in!" });
+        dispatch({
+          type: MESSAGE_ACTIONS_TYPES.SUCCESS,
+          payload: "successfully log in!",
+        });
       })
       .catch((error) => {
-        dispatch({ type: ERROR, payload: "fail to log in!" });
+        dispatch({
+          type: MESSAGE_ACTIONS_TYPES.ERROR,
+          payload: "fail to log in!",
+        });
       });
 
     return;
@@ -27,7 +34,7 @@ export const userLogout = () => {
   localStorage.removeItem("user");
   history.push("/");
   return {
-    type: SIGN_OUT,
+    type: USER_ACTIONS_TYPES.SIGN_OUT,
   };
 };
 
@@ -37,9 +44,12 @@ export const userRegister = (formValues) => async (dispatch, getState) => {
     const token = response.data.jwtToken;
     const jwtDecoded = jwt(token);
     localStorage.setItem("user", JSON.stringify(response.data)); // local: encoeded
-    dispatch({ type: SIGN_IN, payload: jwtDecoded }); // reducer state: decoded
+    dispatch({ type: USER_ACTIONS_TYPES.SIGN_IN, payload: jwtDecoded }); // reducer state: decoded
     history.push("/");
   } else {
-    dispatch({ type: ERROR, payload: "fail to register user!" });
+    dispatch({
+      type: MESSAGE_ACTIONS_TYPES.ERROR,
+      payload: "fail to register user!",
+    });
   }
 };

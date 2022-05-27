@@ -1,4 +1,5 @@
 import { SIGN_IN, SIGN_OUT } from "../actions/types";
+import { USER_ACTIONS_TYPES } from "../actions/types";
 import jwt from "jwt-decode";
 
 let user = null;
@@ -19,10 +20,10 @@ const INITIAL_STATE =
 
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SIGN_IN:
+    case USER_ACTIONS_TYPES.SIGN_IN:
       // action.payload => decoded jwt data
       return { ...state, isSignedIn: true, user: action.payload };
-    case SIGN_OUT:
+    case USER_ACTIONS_TYPES.SIGN_OUT:
       return { ...state, isSignedIn: false, user: null };
     default:
       return state;

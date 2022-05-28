@@ -1,4 +1,4 @@
-import { ADD_SHOPCART, DELETE_SHOPCART, FETCH_SHOPCART } from "./types";
+import { SHOPCART_ACTIONS_TYPES } from "./types";
 import { MESSAGE_ACTIONS_TYPES } from "./types";
 
 export const addShopCart = (course) => (dispatch) => {
@@ -25,7 +25,7 @@ export const addShopCart = (course) => (dispatch) => {
   const addCourse = { _id, price, title, category, instructor };
   shopCart.push(addCourse);
   localStorage.setItem("onlineCourseShopCart", JSON.stringify(shopCart));
-  dispatch({ type: ADD_SHOPCART, payload: addCourse });
+  dispatch({ type: SHOPCART_ACTIONS_TYPES.ADD_SHOPCART, payload: addCourse });
   dispatch({
     type: MESSAGE_ACTIONS_TYPES.SUCCESS,
     payload: `add course:${title} to shop cart`,
@@ -53,7 +53,10 @@ export const deleteShopCart = (courseId) => (dipatch) => {
     }
   });
   localStorage.setItem("onlineCourseShopCart", JSON.stringify(newShopCarts));
-  dipatch({ type: DELETE_SHOPCART, payload: newShopCarts });
+  dipatch({
+    type: SHOPCART_ACTIONS_TYPES.DELETE_SHOPCART,
+    payload: newShopCarts,
+  });
   dipatch({
     type: MESSAGE_ACTIONS_TYPES.SUCCESS,
     payload: `remove course:${title} successfully!`,
@@ -67,5 +70,5 @@ export const fetchShopCart = () => {
   } catch {
     shopCart = [];
   }
-  return { type: FETCH_SHOPCART, payload: shopCart };
+  return { type: SHOPCART_ACTIONS_TYPES.FETCH_SHOPCART, payload: shopCart };
 };

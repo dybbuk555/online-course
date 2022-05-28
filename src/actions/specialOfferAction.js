@@ -1,4 +1,4 @@
-import { CHECK_NEWSTUDENT } from "./types";
+import { STUDENT_ACTIONS_TYPES } from "./types";
 
 export const checkNewStudent = () => {
   var specialOffer = localStorage.getItem("onlineCourseSpecialOffer");
@@ -8,5 +8,8 @@ export const checkNewStudent = () => {
     localStorage.setItem("onlineCourseSpecialOffer", specialOffer);
   }
 
-  return { type: CHECK_NEWSTUDENT, payload: specialOffer };
+  return {
+    type: STUDENT_ACTIONS_TYPES.CHECK_NEWSTUDENT,
+    payload: specialOffer,
+  };
 };

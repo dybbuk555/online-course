@@ -1,11 +1,5 @@
-import {
-  //CREATE_COURSE,
-  //EDIT_COURSE,
-  FETCH_COURSES,
-  FETCH_COURSE,
-  SUBSCRIBE_COURSE,
-  UNSUBSCRIBE_COURSE,
-} from "./types";
+import { COURSE_ACTIONS_TYPES } from "./types";
+
 import { MESSAGE_ACTIONS_TYPES } from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
@@ -16,7 +10,10 @@ export const unSubscribeCourse = (course) => async (dispatch) => {
   server
     .delete(`/course/${course._id}/subscribe`, { headers: authHeader() })
     .then((response) => {
-      dispatch({ type: UNSUBSCRIBE_COURSE, payload: response.data.course });
+      dispatch({
+        type: COURSE_ACTIONS_TYPES.UNSUBSCRIBE_COURSE,
+        payload: response.data.course,
+      });
       // history.go(0);
       dispatch({
         type: MESSAGE_ACTIONS_TYPES.SUCCESS,
@@ -50,7 +47,10 @@ export const subscribeCourse = (course) => async (dispatch, getState) => {
     server
       .post(`/course/${course._id}/subscribe`, {}, { headers: authHeader() })
       .then((response) => {
-        dispatch({ type: SUBSCRIBE_COURSE, payload: response.data.course });
+        dispatch({
+          type: COURSE_ACTIONS_TYPES.SUBSCRIBE_COURSE,
+          payload: response.data.course,
+        });
         // history.go(0);
         dispatch({
           type: MESSAGE_ACTIONS_TYPES.SUCCESS,
@@ -78,7 +78,10 @@ export const fetchCourse = (courseId) => async (dispatch) => {
     .get(`/course/${courseId}`)
     .then((response) => {
       // to keep action state consistent => use array to store course
-      dispatch({ type: FETCH_COURSE, payload: [response.data.course] });
+      dispatch({
+        type: COURSE_ACTIONS_TYPES.FETCH_COURSE,
+        payload: [response.data.course],
+      });
     })
     .catch((error) => {
       if (!error.response) {
@@ -107,7 +110,10 @@ export const fetchCourses = (parameters) => async (dispatch, getState) => {
       params: { filterType, userId, keyWord },
     })
     .then((response) => {
-      dispatch({ type: FETCH_COURSES, payload: response.data.courses });
+      dispatch({
+        type: COURSE_ACTIONS_TYPES.FETCH_COURSES,
+        payload: response.data.courses,
+      });
     })
     .catch((error) => {
       if (!error.response) {
@@ -145,7 +151,7 @@ export const sortCourses = (sortBy) => (dispatch, getState) => {
       );
   }
 
-  dispatch({ type: FETCH_COURSES, payload: sortedArray });
+  dispatch({ type: COURSE_ACTIONS_TYPES.FETCH_COURSES, payload: sortedArray });
 };
 
 export const createCourse = (formValues) => async (dispatch, getState) => {

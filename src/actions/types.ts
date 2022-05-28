@@ -10,19 +10,15 @@ export enum MESSAGE_ACTIONS_TYPES {
     CLEAR = "CLEAR"
 }
 
-// export const SIGN_IN = "SIGN_IN";
-//export const SIGN_OUT = "SIGN_OUT";
-export const SUCCESS = "SUCCESS";
-export const ERROR = "ERROR";
-export const CLEAR = "CLEAR";
+export enum COURSE_ACTIONS_TYPES {
+    SUBSCRIBE_COURSE = 'SUBSCRIBE_COURSE',
+    UNSUBSCRIBE_COURSE="UNSUBSCRIBE_COURSE",
+    CREATE_COURSE ="CREATE_COURSE",
+    EDIT_COURSE="EDIT_COURSE",
+    FETCH_COURSE = "FETCH_COURSE",
+    FETCH_COURSES ="FETCH_COURSES"
+}
 
-export const SUBSCRIBE_COURSE = "SUBSCRIBE_COURSE";
-export const UNSUBSCRIBE_COURSE = "UNSUBSCRIBE_COURSE";
-
-export const CREATE_COURSE = "CREATE_COURSE"; // no needed to be an action
-export const EDIT_COURSE = "EDIT_COURSE";
-export const FETCH_COURSE = "FETCH_COURSE";
-export const FETCH_COURSES = "FETCH_COURSES";
 
 export const CREATE_REVIEW = "CREATE_REVIEW";
 export const EDIT_REVIEW = "EDIT_REVIEW";

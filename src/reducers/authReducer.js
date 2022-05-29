@@ -1,4 +1,3 @@
-import { SIGN_IN, SIGN_OUT } from "../actions/types";
 import { USER_ACTIONS_TYPES } from "../actions/types";
 import jwt from "jwt-decode";
 

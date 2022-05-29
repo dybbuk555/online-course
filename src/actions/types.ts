@@ -49,6 +49,10 @@ export enum STUDENT_ACTIONS_TYPES {
     CHECK_NEWSTUDENT = "CHECK_NEWSTUDENT"
 }
 
+export type SpecialOfferType = {
+    firstVisited?: number
+    remainTime?: Date
+}
 
 // short cart
 

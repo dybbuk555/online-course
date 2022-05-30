@@ -1,12 +1,17 @@
 import server from "../apis/server";
 import jwt from "jwt-decode";
-import { MESSAGE_ACTIONS_TYPES } from "./types";
+import { MESSAGE_ACTIONS_TYPES, ReducerStates,UserFormType,UserSignInType } from "./types";
 import { USER_ACTIONS_TYPES } from "./types";
 import history from "./../helpers/history";
+import { ThunkDispatch } from "redux-thunk";
+import { ActionWithPayload } from "../utils/reducer/reducer.utils";
+
+
+
 
 export const userSignIn =
-  ({ email, password }) =>
-  async (dispatch, getState) => {
+  ({ email, password }:UserSignInType) =>
+  async (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>):Promise<void> => {
     server
       .post("/user/login", { email, password })
       .then((response) => {
@@ -38,7 +43,7 @@ export const userLogout = () => {
   };
 };
 
-export const userRegister = (formValues) => async (dispatch, getState) => {
+export const userRegister = (formValues:UserFormType) => async (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>):Promise<void> => {
   const response = await server.post("/user/register", { ...formValues });
   if (response.data && response.data.jwtToken) {
     const token = response.data.jwtToken;

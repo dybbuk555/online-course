@@ -3,8 +3,16 @@
 export enum USER_ACTIONS_TYPES {
     SIGN_IN = "SIGN_IN",
     SIGN_OUT = "SIGN_OUT",
-
 }
+
+export type UserSignInType = {
+    email?:string,
+    password?:string
+  }
+
+export type UserFormType = {
+   username?:string,
+} & UserSignInType
 
 // message
 export enum MESSAGE_ACTIONS_TYPES {
@@ -27,6 +35,18 @@ export enum COURSE_ACTIONS_TYPES {
     EDIT_COURSE="EDIT_COURSE",
     FETCH_COURSE = "FETCH_COURSE",
     FETCH_COURSES ="FETCH_COURSES"
+}
+
+export type CourseType = {
+    _id?:string,
+    price?:number, 
+    title?:string,
+    category?:string
+    instructor?:Instructor
+}
+
+export type Instructor = {
+    username:string
 }
 
 // review
@@ -62,7 +82,12 @@ export enum SHOPCART_ACTIONS_TYPES {
     DELETE_SHOPCART = "DELETE_SHOPCART"
 }
 
-
+export type ShopCartType = {
+    _id?:string,
+    price?:number, 
+    title?:string,
+    category?:string
+}
 
 
 // reduecer store states

@@ -39,15 +39,37 @@ export enum COURSE_ACTIONS_TYPES {
 
 export type CourseType = {
     _id?:string,
-    price?:number, 
-    title?:string,
-    category?:string
-    instructor?:Instructor
+    price:number, 
+    title:string,
+    category:string,
+    instructor:Instructor,
+    description?:string,
+    
 }
 
 export type Instructor = {
     username:string
 }
+
+export enum CoureOwner {
+    instructor,
+    student,
+    default
+  }
+export type FetchCouresParamsTypes = {
+    filterType:CoureOwner,
+    userId:string,
+    keyWord:string
+  }
+
+export enum CourseSortType  {
+    Title="Title",
+    Category="Category",
+    Price="Price",
+    Instructor="Instructor",
+    reverse="reverse"
+}
+
 
 // review
 

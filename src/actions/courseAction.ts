@@ -1,12 +1,13 @@
-import { COURSE_ACTIONS_TYPES } from "./types";
+import { MESSAGE_ACTIONS_TYPES,COURSE_ACTIONS_TYPES, CourseType ,ReducerStates,FetchCouresParamsTypes,CourseSortType} from "./types";
+import { ThunkDispatch, } from "redux-thunk";
+import { ActionWithPayload } from "../utils/reducer/reducer.utils";
 
-import { MESSAGE_ACTIONS_TYPES } from "./types";
 import { authHeader } from "../helpers/auth-header";
 import server from "../apis/server";
 import { orderBy } from "lodash";
 import history from "./../helpers/history";
 
-export const unSubscribeCourse = (course) => async (dispatch) => {
+export const unSubscribeCourse = (course:CourseType) => async (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>):Promise<void> => {
   server
     .delete(`/course/${course._id}/subscribe`, { headers: authHeader() })
     .then((response) => {
@@ -35,7 +36,7 @@ export const unSubscribeCourse = (course) => async (dispatch) => {
     });
 };
 
-export const subscribeCourse = (course) => async (dispatch, getState) => {
+export const subscribeCourse = (course:CourseType) => async (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>, getState:() => ReducerStates) => {
   const state = getState();
   if (!state.auth.isSignedIn) {
     history.push("/login");
@@ -73,7 +74,7 @@ export const subscribeCourse = (course) => async (dispatch, getState) => {
   }
 };
 
-export const fetchCourse = (courseId) => async (dispatch) => {
+export const fetchCourse = (courseId:CourseType) => async (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>) => {
   server
     .get(`/course/${courseId}`)
     .then((response) => {
@@ -98,7 +99,7 @@ export const fetchCourse = (courseId) => async (dispatch) => {
     });
 };
 
-export const fetchCourses = (parameters) => async (dispatch, getState) => {
+export const fetchCourses = (parameters:FetchCouresParamsTypes) => async (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>) => {
   const { filterType, userId, keyWord } = parameters;
   console.log("fetchCourses filterType:", filterType);
   // authHeader is not needed, because all peoeple should be able to access all classes
@@ -130,14 +131,14 @@ export const fetchCourses = (parameters) => async (dispatch, getState) => {
     });
 };
 
-export const sortCourses = (sortBy) => (dispatch, getState) => {
+export const sortCourses = (sortBy:CourseSortType) => (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>, getState:() => ReducerStates) => {
   let sortedArray;
   switch (sortBy) {
     case "Instructor":
       sortedArray = orderBy(
         getState().courses,
         (item) => item.instructor.username,
-        ["aesc"]
+        ["asc"]
       );
       break;
     case "reverse":
@@ -147,17 +148,17 @@ export const sortCourses = (sortBy) => (dispatch, getState) => {
       sortedArray = orderBy(
         getState().courses,
         [sortBy.toLowerCase()],
-        ["aesc"]
+        ["asc"]
       );
   }
 
   dispatch({ type: COURSE_ACTIONS_TYPES.FETCH_COURSES, payload: sortedArray });
 };
 
-export const createCourse = (formValues) => async (dispatch, getState) => {
+export const createCourse = (formValues:CourseType) => async (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>) => {
   server
     .post("/course", { formValues }, { headers: authHeader() })
-    .then((response) => {
+    .then(() => {
       history.push("/instructor/course"); // avoid clearing alert message
       dispatch({
         type: MESSAGE_ACTIONS_TYPES.SUCCESS,
@@ -180,14 +181,14 @@ export const createCourse = (formValues) => async (dispatch, getState) => {
 };
 
 export const editCourse =
-  (formValues, courseId) => async (dispatch, getState) => {
+  (formValues:CourseType, courseId:string) => async (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>> ) => {
     server
       .put(
         `/course/${courseId}/edit`,
         { formValues },
         { headers: authHeader() }
       )
-      .then((response) => {
+      .then(() => {
         history.push("/instructor/course"); // avoid clearing alert message
         dispatch({
           type: MESSAGE_ACTIONS_TYPES.SUCCESS,

@@ -1,6 +1,10 @@
 import { MESSAGE_ACTIONS_TYPES, Message } from "./types";
 import { Action, ActionWithPayload } from "../utils/reducer/reducer.utils";
 
+export type MessageActions = {
+  type: MESSAGE_ACTIONS_TYPES,
+  payload:Message
+}
 
 export const messageSuccess = (message:Message):ActionWithPayload<Message> => {
   return {

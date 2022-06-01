@@ -1,4 +1,6 @@
-import { STUDENT_ACTIONS_TYPES, SpecialOfferType } from "./types";
+import { STUDENT_ACTIONS_TYPES } from "./types";
+
+export type SpecialOfferAction = {type:STUDENT_ACTIONS_TYPES,payload:string }
 
 export const checkNewStudent = () => {
   var specialOffer = localStorage.getItem("onlineCourseSpecialOffer") as number | null

@@ -2,6 +2,13 @@ import { SHOPCART_ACTIONS_TYPES,CourseType,ShopCartType, MESSAGE_ACTIONS_TYPES,R
 import { ThunkDispatch } from "redux-thunk";
 import { ActionWithPayload } from "../utils/reducer/reducer.utils";
 
+
+
+export type shopCartActions = {
+  type: SHOPCART_ACTIONS_TYPES,
+  payload:ShopCartType
+}
+
 export const addShopCart = (course:CourseType)=> (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>) => {
   let shopCartString:string|null = localStorage.getItem("onlineCourseShopCart");
   let shopCart 
@@ -42,9 +49,9 @@ export const deleteShopCart = (courseId:string) => (dipatch: ThunkDispatch<Reduc
   let shopCartString = localStorage.getItem("onlineCourseShopCart");
   try {
     if(!shopCartString){throw Error}
-    const shopCart = JSON.parse(shopCartString);
+    const shopCart = JSON.parse(shopCartString) as ShopCartType[]
     let title = "";
-    const newShopCarts = shopCart.filter((course:CourseType) => {
+    const newShopCarts = shopCart.filter((course:ShopCartType) => {
       if (course._id === courseId) {
         
         title = !!course.title ? course.title : ""
@@ -74,7 +81,8 @@ export const deleteShopCart = (courseId:string) => (dipatch: ThunkDispatch<Reduc
 
 export const fetchShopCart = () => {
   const  shopCartString = localStorage.getItem("onlineCourseShopCart");
-  let shopCart = []
+  let shopCart: ShopCartType[]   = [] 
+
   if( shopCartString){
     shopCart = JSON.parse(shopCartString);
   }

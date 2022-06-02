@@ -14,6 +14,11 @@ export type UserFormType = {
    username?:string,
 } & UserSignInType
 
+export type UserDataType = {
+    userId:string, username: string,
+  exp:number, iat:number
+  }
+
 // message
 export enum MESSAGE_ACTIONS_TYPES {
     SUCCESS = "SUCCESS",
@@ -106,9 +111,9 @@ export enum SHOPCART_ACTIONS_TYPES {
 
 export type ShopCartType = {
     _id?:string,
-    price?:number, 
-    title?:string,
-    category?:string
+    price:number, 
+    title:string,
+    category:string
 }
 
 

@@ -1,12 +1,16 @@
 import server from "../apis/server";
 import jwt from "jwt-decode";
-import { MESSAGE_ACTIONS_TYPES, ReducerStates,UserFormType,UserSignInType } from "./types";
+import { MESSAGE_ACTIONS_TYPES, ReducerStates,UserFormType,UserSignInType,UserDataType } from "./types";
 import { USER_ACTIONS_TYPES } from "./types";
 import history from "./../helpers/history";
 import { ThunkDispatch } from "redux-thunk";
 import { ActionWithPayload } from "../utils/reducer/reducer.utils";
 
 
+export type UserActionType = {
+  type:USER_ACTIONS_TYPES,
+  payload:UserDataType
+}
 
 
 export const userSignIn =

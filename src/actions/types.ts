@@ -44,12 +44,16 @@ export enum COURSE_ACTIONS_TYPES {
 
 export type CourseType = {
     _id?:string,
-    price:number, 
-    title:string,
-    category:string,
+    price?:number, 
+    title?:string,
+    category?:string,
     instructor:Instructor,
+    students?:Student[],
     description?:string,
     
+}
+export type Student = {
+    username:string
 }
 
 export type Instructor = {

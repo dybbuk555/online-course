@@ -7,13 +7,19 @@ import server from "../apis/server";
 import { orderBy } from "lodash";
 import history from "./../helpers/history";
 
+
+export type CourseActionType = {
+  type: COURSE_ACTIONS_TYPES,
+  payload: CourseType[]
+}
+
 export const unSubscribeCourse = (course:CourseType) => async (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>):Promise<void> => {
   server
     .delete(`/course/${course._id}/subscribe`, { headers: authHeader() })
     .then((response) => {
       dispatch({
         type: COURSE_ACTIONS_TYPES.UNSUBSCRIBE_COURSE,
-        payload: response.data.course,
+        payload: [response.data.course], // to keep payload type consistent
       });
       // history.go(0);
       dispatch({
@@ -50,7 +56,7 @@ export const subscribeCourse = (course:CourseType) => async (dispatch:ThunkDispa
       .then((response) => {
         dispatch({
           type: COURSE_ACTIONS_TYPES.SUBSCRIBE_COURSE,
-          payload: response.data.course,
+          payload: [response.data.course],
         });
         // history.go(0);
         dispatch({
@@ -132,11 +138,11 @@ export const fetchCourses = (parameters:FetchCouresParamsTypes) => async (dispat
 };
 
 export const sortCourses = (sortBy:CourseSortType) => (dispatch:ThunkDispatch<ReducerStates, void,ActionWithPayload<any>>, getState:() => ReducerStates) => {
-  let sortedArray;
+  let sortedArray:CourseType[];
   switch (sortBy) {
     case "Instructor":
       sortedArray = orderBy(
-        getState().courses,
+        getState().courses as CourseType[],
         (item) => item.instructor.username,
         ["asc"]
       );

@@ -4,7 +4,7 @@ import UserHeader from "./UserHeader";
 
 // user route
 import UserLogout from "./UserLogout";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Routes } from "react-router-dom";
 import history from "../../helpers/history";
 import CourseShow from "../share/CourseShow";
 import UserInfo from "./UserInfo";
@@ -15,7 +15,7 @@ class UserPage extends React.Component {
       <Fragment>
         <Router history={history}>
           <UserHeader />
-          <Switch>
+          <Routes>
             <Route path="/user/logout" component={UserLogout} />
             <Route
               path="/user/course"
@@ -25,7 +25,7 @@ class UserPage extends React.Component {
               }}
             />
             <Route path="/user/statistic" component={UserInfo} />
-          </Switch>
+          </Routes>
         </Router>
       </Fragment>
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 
 const PrivateRoute = ({ component: Component, isSignedIn, ...rest }) => {
@@ -7,7 +7,7 @@ const PrivateRoute = ({ component: Component, isSignedIn, ...rest }) => {
     <Route
       {...rest}
       render={() =>
-        isSignedIn ? <Component /> : <Redirect to={{ pathname: "/login" }} />
+        isSignedIn ? <Component /> : <Navigate to={{ pathname: "/login" }} />
       }
     />
   );

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import InstructorHeader from "./InstructorHeader";
 import history from "../../helpers/history";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Routes } from "react-router-dom";
 import CourseCreate from "./CourseCreate";
 import CourseEdit from "./CourseEdit";
 import CourseShow from "../share/CourseShow";
@@ -13,7 +13,7 @@ class InstructorPage extends React.Component {
       <Fragment>
         <Router history={history}>
           <InstructorHeader />
-          <Switch>
+          <Routes>
             <Route
               exact
               path="/instructor/course/"
@@ -34,7 +34,7 @@ class InstructorPage extends React.Component {
             <Route exact path="/instructor/statistic">
               <InstructorInfo />
             </Route>
-          </Switch>
+          </Routes>
         </Router>
       </Fragment>
     );

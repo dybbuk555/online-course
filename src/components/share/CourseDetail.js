@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchCourse, subscribeCourse, unSubscribeCourse } from "../../actions";
 import "./courseDetail.css";
@@ -7,40 +8,36 @@ import ReviewForm from "./ReviewForm";
 import { createReview } from "../../actions/reviewAction";
 import { addShopCart } from "../../actions/shopCartAction";
 import history from "../../helpers/history";
-class CourseDetail extends React.Component {
-  componentDidMount() {
-    this.props.fetchCourse(this.props.match.params.courseId);
-    this.unlisten = history.listen(({ pathname }) => {
-      const urlPath = pathname.split("/");
 
-      if (urlPath[urlPath.length - 1] === "detail") {
-        // only want to fetchCourse when chaning location in detail route
-        this.props.fetchCourse(history.location.pathname.split("/")[2]);
-      }
-    });
-  }
-  componentWillUnmount() {
-    // clean up listener
-    this.unlisten();
-  }
-  onSubmit = (formValues) => {
-    formValues.courseId = this.props.course._id;
-    this.props.createReview(formValues);
+function CourseDetail(props) {
+  console.log("props from CourseDetail", props);
+  const { course } = props;
+  const { courseId } = useParams();
+  console.log("params", courseId);
+  useEffect(() => {
+    console.log("#########CourseDetail props", props);
+    props.fetchCourse(courseId);
+
+    // this.unlisten = history.listen(({ pathname }) => {
+    //   const urlPath = pathname.split("/");
+
+    //   if (urlPath[urlPath.length - 1] === "detail") {
+    //     // only want to fetchCourse when chaning location in detail route
+    //     this.props.fetchCourse(history.location.pathname.split("/")[2]);
+    //   }
+    // });
+    return () => {
+      // clean up listener
+      // this.unlisten();
+    };
+  }, []);
+
+  const onSubmit = (formValues) => {
+    formValues.courseId = props.course._id;
+    props.createReview(formValues);
   };
 
-  // cuases infinite loop when data fials to fetch
-  // componentDidUpdate() {
-  //   if (history.location.pathname.split("/")[2] !== this.props.course._id) {
-  //     console.log(
-  //       "not identical",
-  //       history.location.pathname.split("/")[2],
-  //       this.props.course._id
-  //     );
-  //     //this.props.fetchCourse(this.props.match.params.courseId);
-  //   }
-  // }
-
-  detailHeader(course) {
+  function detailHeader(course) {
     if (!Array.isArray(course)) {
       return (
         <Fragment>
@@ -57,8 +54,8 @@ class CourseDetail extends React.Component {
     }
   }
 
-  renderPromation(course) {
-    if (this.props.newStudent && this.props.newStudent - Date.now() > 0) {
+  function renderPromation(course) {
+    if (props.newStudent && props.newStudent - Date.now() > 0) {
       return (
         <Fragment>
           <span className="fs-3">{course.price}$</span>
@@ -73,16 +70,16 @@ class CourseDetail extends React.Component {
     }
   }
 
-  renderSubscribeBtn(course) {
+  function renderSubscribeBtn(course) {
     if (
-      this.props.auth.isSignedIn &&
-      course.students.indexOf(this.props.auth.user.userId) >= 0
+      props.auth.isSignedIn &&
+      course.students.indexOf(props.auth.user.userId) >= 0
     ) {
       return (
         <button
           className="btn btn-outline-danger w-75 my-3"
           onClick={() => {
-            this.props.unSubscribeCourse(course);
+            props.unSubscribeCourse(course);
           }}
         >
           Unsubscribe
@@ -93,7 +90,7 @@ class CourseDetail extends React.Component {
       <button
         className="btn btn-outline-primary w-75 my-3"
         onClick={() => {
-          this.props.subscribeCourse(course);
+          props.subscribeCourse(course);
         }}
       >
         Subscribe
@@ -101,7 +98,7 @@ class CourseDetail extends React.Component {
     );
   }
 
-  renderSideBar(course) {
+  function renderSideBar(course) {
     return (
       <div className="sideBar text-center">
         <img
@@ -109,16 +106,16 @@ class CourseDetail extends React.Component {
           className="card-img-top"
           alt="course"
         />
-        <p className="mt-3">{this.renderPromation(course)}</p>
+        <p className="mt-3">{renderPromation(course)}</p>
         <button
           className="btn btn-outline-warning w-75 mt-3"
           onClick={() => {
-            this.props.addShopCart(course);
+            props.addShopCart(course);
           }}
         >
           <h5> Add to cart</h5>
         </button>
-        {this.renderSubscribeBtn(course)}
+        {renderSubscribeBtn(course)}
         {/* <button className="btn btn-outline-primary w-75 my-3">
           <h5> Subscribe now</h5>
         </button> */}
@@ -134,7 +131,7 @@ class CourseDetail extends React.Component {
     );
   }
 
-  contentRender(course) {
+  function contentRender(course) {
     let seeds =
       course.title[0].charCodeAt() +
       course.title[1].charCodeAt() * 3 +
@@ -154,7 +151,7 @@ class CourseDetail extends React.Component {
       );
     });
   }
-  renderLearn() {
+  function renderLearn() {
     return (
       <div className="fontAwesome">
         <div className="row">
@@ -180,7 +177,7 @@ class CourseDetail extends React.Component {
     );
   }
 
-  renderComments(course) {
+  function renderComments(course) {
     if (course.reviews.length === 0) {
       return <h1>There are no comments...</h1>;
     }
@@ -237,60 +234,56 @@ class CourseDetail extends React.Component {
     });
   }
 
-  renderCommentArea(course) {
+  function renderCommentArea(course) {
     return (
       <div className="commentArea mt-5">
         <h1>Comments:</h1>
         {/* leave comment */}
-        <ReviewForm onSubmit={this.onSubmit} />
+        <ReviewForm onSubmit={onSubmit} />
         {/* leave comment */}
 
         <h3 className="mx-2">Other comments:</h3>
-        {this.renderComments(course)}
+        {renderComments(course)}
       </div>
     );
   }
 
-  render() {
-    if (Array.isArray(this.props.course)) {
-      return <Fragment></Fragment>;
-    }
-
-    const course = this.props.course;
-
-    if (!course) {
-      return null;
-    }
-
-    return (
-      <Fragment>
-        <div className="bg-dark detailHeaderBg">
-          <div className="text-light text-wrapped detailHeader">
-            {this.detailHeader(course)}
-          </div>
-        </div>
-        {this.renderSideBar(course)}
-        <div className="detailBody mt-3">
-          <div className="card my-3">
-            <div className="card-body">
-              <h3>
-                <strong>What you will learn:</strong>
-              </h3>
-              {this.renderLearn()}
-            </div>
-          </div>
-
-          <div className="card">
-            <div className="card-header">
-              <h2>course content</h2>
-            </div>
-            <div className="card-body">{this.contentRender(course)}</div>
-          </div>
-          {this.renderCommentArea(course)}
-        </div>
-      </Fragment>
-    );
+  if (Array.isArray(props.course)) {
+    return <Fragment></Fragment>;
   }
+
+  if (!course) {
+    return null;
+  }
+
+  return (
+    <Fragment>
+      <div className="bg-dark detailHeaderBg">
+        <div className="text-light text-wrapped detailHeader">
+          {detailHeader(course)}
+        </div>
+      </div>
+      {renderSideBar(course)}
+      <div className="detailBody mt-3">
+        <div className="card my-3">
+          <div className="card-body">
+            <h3>
+              <strong>What you will learn:</strong>
+            </h3>
+            {renderLearn()}
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-header">
+            <h2>course content</h2>
+          </div>
+          <div className="card-body">{contentRender(course)}</div>
+        </div>
+        {renderCommentArea(course)}
+      </div>
+    </Fragment>
+  );
 }
 
 const mapStateToProps = (state) => {

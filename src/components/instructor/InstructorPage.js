@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import InstructorHeader from "./InstructorHeader";
-import history from "../../helpers/history";
-import { Router, Route, Routes } from "react-router-dom";
+import { Route, Routes, Outlet } from "react-router-dom";
 import CourseCreate from "./CourseCreate";
 import CourseEdit from "./CourseEdit";
 import CourseShow from "../share/CourseShow";
@@ -11,31 +10,28 @@ class InstructorPage extends React.Component {
   render() {
     return (
       <Fragment>
-        <Router history={history}>
-          <InstructorHeader />
-          <Routes>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Fragment>
+                <InstructorHeader />
+                <Outlet />
+              </Fragment>
+            }
+          >
             <Route
-              exact
-              path="/instructor/course/"
-              render={() => {
-                return <CourseShow filterType="instructor" />;
-              }}
+              path="course"
+              element={<CourseShow filterType="instructor" />}
             />
-
-            <Route exact path="/instructor/course/new">
-              <CourseCreate />
-            </Route>
+            <Route path="course/new" element={<CourseCreate />} />
             <Route
-              exact
-              path="/instructor/course/:courseId/edit"
-              component={CourseEdit}
+              path="instructor/course/:courseId/edit"
+              element={<CourseEdit />}
             />
-
-            <Route exact path="/instructor/statistic">
-              <InstructorInfo />
-            </Route>
-          </Routes>
-        </Router>
+            <Route path="statistic" element={<InstructorInfo />} />
+          </Route>
+        </Routes>
       </Fragment>
     );
   }

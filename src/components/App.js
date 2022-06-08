@@ -56,7 +56,7 @@ class App extends React.Component {
                 element={<CourseDetail />}
               />
               <Route
-                path="instructor"
+                path="/instructor/*"
                 element={
                   <PrivateRoute>
                     <InstructorPage />
@@ -64,7 +64,7 @@ class App extends React.Component {
                 }
               />
               <Route
-                path="user"
+                path="/user"
                 element={
                   <PrivateRoute>
                     <UserPage />

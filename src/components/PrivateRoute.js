@@ -1,16 +1,14 @@
-import React from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 
-const PrivateRoute = ({ component: Component, isSignedIn, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={() =>
-        isSignedIn ? <Component /> : <Navigate to={{ pathname: "/login" }} />
-      }
-    />
-  );
+const PrivateRoute = ({ children, isSignedIn, ...rest }) => {
+  console.log("PrivateRotue", children, isSignedIn, rest);
+
+  if (isSignedIn) {
+    return children;
+  } else {
+    return <Navigate to="/login" replace />;
+  }
 };
 
 const mapStateToProps = (state) => {

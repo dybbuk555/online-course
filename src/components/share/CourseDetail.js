@@ -7,15 +7,11 @@ import courseCatgory from "../../resources/svgs";
 import ReviewForm from "./ReviewForm";
 import { createReview } from "../../actions/reviewAction";
 import { addShopCart } from "../../actions/shopCartAction";
-import history from "../../helpers/history";
 
 function CourseDetail(props) {
-  console.log("props from CourseDetail", props);
   const { course } = props;
   const { courseId } = useParams();
-  console.log("params", courseId);
   useEffect(() => {
-    console.log("#########CourseDetail props", props);
     props.fetchCourse(courseId);
 
     // this.unlisten = history.listen(({ pathname }) => {

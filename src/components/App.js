@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
-import { Router, Routes, Route, Outlet } from "react-router-dom";
+import {  Routes, Route, Outlet } from "react-router-dom";
 import Header from "./header/Header";
 import UserRegister from "./users/UserRegister";
 import UserLogin from "./users/UserLogin";
 import UserPage from "./users/UserPage";
 import InstructorPage from "./instructor/InstructorPage";
 import CourseDetail from "./share/CourseDetail";
-import history from "../helpers/history";
 import PrivateRoute from "./PrivateRoute";
 import { messageClear } from "../actions";
 import { connect } from "react-redux";
@@ -16,14 +15,6 @@ import GoToTop from "./share/goToTop";
 import TopButton from "./share/TopButton";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    // const historyListener = history.listen((location, action) => {
-    //   console.log("history listenr location", location, "action:", action);
-    //   this.props.messageClear();
-    // });
-    // console.log("historyListener:", historyListener);
-  }
 
   render() {
     const { alert } = this.props;
